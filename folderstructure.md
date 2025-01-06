@@ -71,7 +71,6 @@ This documentation outlines the folder structure of the project, detailing each 
 │       └── integrations/           # Full-stack or third-party API integration tests
 │           └── externalApi.test.ts # Tests for interactions with external APIs
 └── tsconfig.json                   # TypeScript configuration (if applicable)
-
 ## Folder Breakdown
 
 ### 1. `/app/`
