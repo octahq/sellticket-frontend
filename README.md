@@ -40,5 +40,33 @@ Additional Guidelines
 
 This version includes the requirements for breaking down designs into reusable components, along with testing guidelines for UI and API integration, ensuring a robust development process.
 
-commit message 
-"Example: 'feat(auth): add login feature'"
+
+
+Commit Message Guidelines
+
+To ensure consistent and meaningful commit messages, please follow the Conventional Commits format:
+
+<type>(<scope>): <subject>
+
+	•	type: Describes the kind of change (e.g., feat, fix, docs, style, refactor, test, chore).
+	•	scope: (Optional) Specifies the section of the codebase affected (e.g., auth, api, ui).
+	•	subject: A concise description of the change.
+
+Examples:
+	1.	Feature Addition:
+
+feat(api): add new endpoint for user login
+
+
+	2.	Bug Fix:
+
+fix(auth): resolve issue with JWT token validation
+
+
+	3.	Documentation Update:
+
+docs(readme): update installation instructions
+
+
+
+Following this format helps in maintaining a clear and structured commit history.
