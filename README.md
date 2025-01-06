@@ -39,3 +39,6 @@ Additional Guidelines
 	•	Manage Feature Flags: Periodically review and clean up unused feature flags.
 
 This version includes the requirements for breaking down designs into reusable components, along with testing guidelines for UI and API integration, ensuring a robust development process.
+
+commit message 
+"Example: 'feat(auth): add login feature'"
