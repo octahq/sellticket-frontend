@@ -2,7 +2,7 @@
 Here’s the updated README section with the additional details:
 
 Branching Strategy and Workflow
-
+  
 Branches Overview
 	•	main: Stable production-ready code.
 	•	develop: Main development branch for integrating new features and bug fixes.
