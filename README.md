@@ -2,7 +2,7 @@
 Here’s the updated README section with the additional details:
 
 Branching Strategy and Workflow
-
+  
 Branches Overview
 	•	main: Stable production-ready code.
 	•	develop: Main development branch for integrating new features and bug fixes.
@@ -12,7 +12,7 @@ Creating a Feature Branch
 	1.	Create a feature branch from develop:
 
 git checkout -b feature/feature-description develop
-
+  
 
 
 Feature Flags
