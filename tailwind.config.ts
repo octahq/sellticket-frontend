@@ -61,7 +61,9 @@ export default {
 				'primary-gradient': 'linear-gradient(360deg, #D4FF5F 8.93%, #E2FF94 100%)', 
 				'secondary-gradient': 'linear-gradient(360deg, #292D32 8.93%, #56606B 100%)',
 				'auth-icon-wrapper-bg': 'linear-gradient(132.46deg, #292D32 0%, #8D9091 100%)',
-				'auth-icon-wrapper-border': 'linear-gradient(132.46deg, #8D9091 0%, #292D32 100%)'
+				'auth-icon-wrapper-border': 'linear-gradient(132.46deg, #8D9091 0%, #292D32 100%)',
+				'input-gradient': 'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #CCCCCC 100%)',
+				'input-gradient-error': 'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #C5292A 100%)' 
 			},
 			boxShadow: {
 				'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040'

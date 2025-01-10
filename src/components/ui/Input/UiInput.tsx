@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import UiField from '../Field/UiField';
 
@@ -34,7 +34,7 @@ interface Props {
    * formData.confirm_password, the name prop should be confirm_password.
    */
   name: string;
-  error?: string;
+  error?: React.ReactNode;
   disabled?: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
   onChange: (event: { name: string; value: string | null }) => void;
@@ -63,37 +63,43 @@ export default function UiInput({
     onChange({ name: e.target.name, value: e.target.value });
   }
 
-  // const validationStyle = useMemo(() => {
-  //   return error ? 'border-danger-200' : `bg-white border-tertiary-700`;
-  // }, [error]);
+  const validatedBorder = useMemo(() => {
+    return error ? 'bg-input-gradient-error' : `bg-input-gradient`;
+  }, [error]);
+
+  const validatedPlaceholder = useMemo(()=> {
+    return error ? 'placeholder:text-danger-500' : 'placeholder:text-stroke-500'
+  }, [error])
 
   return (
     <UiField label={label} error={error}>
-      <div
-        className='relative w-full h-11 bg-neutral-100 flex gap-[5px] px-4 rounded-[10px]'
-      >
-        {prefixNode && (
-          <div className="text-sm flex items-center">
-            {prefixNode}
-          </div>
-        )}
+      <div className={`h-11 w-full box-border pt-[1.5px] pr-[1.5px] p-[1px] rounded-[10px] ${validatedBorder}`}>
+        <div
+          className='relative w-full h-full  bg-neutral-100 flex gap-[5px] px-4 rounded-[9px]'
+        >
+          {prefixNode && (
+            <div className="text-sm flex items-center">
+              {prefixNode}
+            </div>
+          )}
 
-        <input
-          className={`w-full flex justify-center items-center placeholder:text-sm bg-transparent outline-none`}
-          placeholder={placeholder}
-          type={inputType}
-          value={value || ''}
-          name={name}
-          id={name}
-          disabled={disabled}
-          onChange={sendValue}
-        />
-        
-        {suffixNode && (
-          <div className="pl-2 pr-4 text-gray-500 text-sm flex items-center">
-            {suffixNode}
-          </div>
-        )}
+          <input
+            className={`w-full flex justify-center items-center text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
+            placeholder={placeholder}
+            type={inputType}
+            value={value || ''}
+            name={name}
+            id={name}
+            disabled={disabled}
+            onChange={sendValue}
+          />
+          
+          {suffixNode && (
+            <div className="pl-2 pr-4 text-gray-500 text-sm flex items-center">
+              {suffixNode}
+            </div>
+          )}
+        </div>
       </div>
     </UiField>
   );

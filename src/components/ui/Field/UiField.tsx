@@ -1,11 +1,12 @@
 import React from 'react';
 
 interface Props {
-  error?: string;
+  error?: React.ReactNode;
   label?: React.ReactNode;
   hint?: string;
   children: React.ReactNode;
 }
+
 export default function UiField({
   error,
   label,
@@ -18,9 +19,11 @@ export default function UiField({
         {label}{' '}
       </label>
       {children}
-      <div data-testid="error-text" className=" text-danger-500 text-xs">
-        {error}
-      </div>
+      {error && (
+        <div className="text-danger-500 text-[10px] leading-3 mt-2">
+          {error}
+        </div>
+      )}
       <div className="text-xs text-gray-900">{hint}</div>
     </div>
   );

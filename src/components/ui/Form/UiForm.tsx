@@ -36,7 +36,7 @@ export default function UiForm({
         },
         {},
       );
-    }
+    }    
     
     return errors;
   }
@@ -46,6 +46,7 @@ export default function UiForm({
       initialValues={formData}
       validate={validateForm}
       onSubmit={onSubmit}
+      validateOnChange
     >
       {({ errors, handleSubmit, isSubmitting }) => (
         <form onSubmit={handleSubmit}>
