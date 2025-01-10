@@ -73,7 +73,7 @@ export default function UiInput({
 
   return (
     <UiField label={label} error={error}>
-      <div className={`h-11 w-full box-border pt-[1.5px] pr-[1.5px] pb-[1.5px] p-[1px] rounded-[10px] ${validatedBorder}`}>
+      <div className={`h-11 w-full box-border p-[1.5px] rounded-[10px] ${validatedBorder}`}>
         <div
           className='relative w-full h-full  bg-neutral-100 flex gap-[5px] px-4 rounded-[9px]'
         >
