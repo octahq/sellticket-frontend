@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react';
 
 const variantClasses = {
-  primary: 'bg-secondary-gradient text-white',
+  primary: 'bg-secondary-gradient text-white hover:border-red-300'
 };
 
 const sizeClasses = {
@@ -28,6 +28,7 @@ interface Props {
   type?: 'button' | 'submit';
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
+
 export default function UiButton({
   children,
   variant = 'primary',
@@ -41,9 +42,9 @@ export default function UiButton({
 }: Props) {
   return (
     <button
-      className={`flex gap-2 items-center justify-center whitespace-nowrap ${
-        block ? 'w-full' : ''
-      } ${variantClasses[variant]} ${sizeClasses[size]} ${
+      className={`flex gap-2 items-center justify-center whitespace-nowrap  ${
+      block ? 'w-full' : ''
+    } ${variantClasses[variant]} ${sizeClasses[size]}  ${
         disabled && 'opacity-50 cursor-not-allowed'
       } ${radiusClasses[roundedVariant]}`}
       disabled={disabled || loading}
@@ -54,3 +55,4 @@ export default function UiButton({
     </button>
   );
 }
+
