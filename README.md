@@ -2,7 +2,7 @@
 Here’s the updated README section with the additional details:
 
 Branching Strategy and Workflow
-  
+
 Branches Overview
 	•	main: Stable production-ready code.
 	•	develop: Main development branch for integrating new features and bug fixes.
@@ -12,7 +12,7 @@ Creating a Feature Branch
 	1.	Create a feature branch from develop:
 
 git checkout -b feature/feature-description develop
-  
+
 
 
 Feature Flags
@@ -39,3 +39,34 @@ Additional Guidelines
 	•	Manage Feature Flags: Periodically review and clean up unused feature flags.
 
 This version includes the requirements for breaking down designs into reusable components, along with testing guidelines for UI and API integration, ensuring a robust development process.
+
+commit style Here’s a short documentation example for developers to follow the correct commit message format:
+
+Commit Message Guidelines
+
+To ensure consistent and meaningful commit messages, please follow the Conventional Commits format:
+
+<type>(<scope>): <subject>
+
+	•	type: Describes the kind of change (e.g., feat, fix, docs, style, refactor, test, chore).
+	•	scope: (Optional) Specifies the section of the codebase affected (e.g., auth, api, ui).
+	•	subject: A concise description of the change.
+
+Examples:
+	1.	Feature Addition:
+
+feat(api): add new endpoint for user login
+
+
+	2.	Bug Fix:
+
+fix(auth): resolve issue with JWT token validation
+
+
+	3.	Documentation Update:
+
+docs(readme): update installation instructions
+
+
+
+Following this format helps in maintaining a clear and structured commit history.
