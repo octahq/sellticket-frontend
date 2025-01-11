@@ -1,62 +1,74 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
-    darkMode: ["class"],
-    content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
+					base: '#D4FF5F',
+					50: '#FDFFFA',
+					100: '#F6FFDF',
+					200: '#F1FFCA',
+					300: '#E9FFAF',
+					400: '#E2FF94',
+					500: '#DBFF7A',
+					600: '#B1D44F',
+					700: '#8DAA3F',
+					800: '#6A8030',
+					900: '#475520',
+					1000: '#475520'
+				},
+				secondary: {//renamed from Grey in the design
+					100: '#ABABAB',
+					200: '#A1A1A1',
+					300: '#929292',
+					400: '#8D9091',
+					500: '#6B6A6A',
+					600: '#5B5B5B',
+					700: '#292D32',
+					800: '#0D0D0D',
+				},
+				neutral: {//renamed from BG in the design
+					100: '#FAFAFA',
+					200: '#F5F5F5F5',
+					300: '#E6E6E6'
+				},
+				danger: {
+					100: '#FCEFEF',
+					500: '#C5292A'
+				},
+				warning: {
+					500: '#FFAC00'
+				},
+				lines: {
+					100: '#EFEFEF'
+				},
+				stroke: {
+					100: '#F1F1F1',
+					200: '#E8EAEA',
+					300: '#ECECEC',
+					400: '#A0A0A0',
+					500: '#9C9C9C'
+				}
   		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
+			backgroundImage: {
+				'primary-gradient': 'linear-gradient(360deg, #D4FF5F 8.93%, #E2FF94 100%)', 
+				'secondary-gradient': 'linear-gradient(360deg, #292D32 8.93%, #56606B 100%)',
+				'auth-icon-wrapper-bg': 'linear-gradient(132.46deg, #292D32 0%, #8D9091 100%)',
+				'auth-icon-wrapper-border': 'linear-gradient(132.46deg, #8D9091 0%, #292D32 100%)',
+				'input-gradient': 'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #CCCCCC 100%)',
+				'input-gradient-error': 'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #C5292A 100%)' 
+			},
+			boxShadow: {
+				'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040'
+			},
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
