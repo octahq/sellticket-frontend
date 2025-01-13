@@ -19,7 +19,7 @@ export default function RootLayout({
         {/* Sidebar */}
         <div
           className={cn(
-            'col-span-1 h-full overflow-y-auto bg-gray-100',
+            'w-[280px] h-full overflow-y-auto bg-gray-100',
             isSmallScreen && 'hidden'
           )}
         >
