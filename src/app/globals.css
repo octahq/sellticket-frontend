@@ -8,10 +8,11 @@
   box-sizing: border-box;
 }
 
+/* remove default auto-fill input background color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #121212; /* Adjust color as needed */
+  -webkit-text-fill-color: #121212; 
   transition: background-color 5000s ease-in-out 0s; 
 }
 
@@ -21,11 +22,21 @@ input:-webkit-autofill {
   -webkit-text-fill-color: inherit;
 }
 
+/* remove the number input default up and down arrows  */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  -ms-appearance: textfield;
+  appearance: textfield;
+}
+
 .auth-layout {
   background-image: url('/auth-background-pattern.svg');
   background-size: cover;
   background-position: center;
 }
-
-
-

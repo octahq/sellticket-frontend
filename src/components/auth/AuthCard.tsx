@@ -1,3 +1,6 @@
+/**
+ * This component renders all auth pages in web screens
+ */
 
 export default function AuthCard({children}: {  children: React.ReactNode}) {
   return (
