@@ -164,3 +164,25 @@ TODO Comments
 • Best Practices:
 • Use TODO comments to mark unfinished tasks or areas needing improvement.
 • Provide sufficient context within the TODO to clarify the task’s purpose and next steps.
+	•	type: Describes the kind of change (e.g., feat, fix, docs, style, refactor, test, chore).
+	•	scope: (Optional) Specifies the section of the codebase affected (e.g., auth, api, ui).
+	•	subject: A concise description of the change.
+
+Examples:
+	1.	Feature Addition:
+
+feat(api): add new endpoint for user login
+
+
+	2.	Bug Fix:
+
+fix(auth): resolve issue with JWT token validation
+
+
+	3.	Documentation Update:
+
+docs(readme): update installation instructions
+
+
+
+Following this format helps in maintaining a clear and structured commit history.
