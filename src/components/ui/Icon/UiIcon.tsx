@@ -1,12 +1,14 @@
 import Danger from '@/assets/icons/danger.svg';
-import Envelope from '@/assets/icons/envelope.svg';
+import Message from '@/assets/icons/message.svg';
+import MessageNotification from '@/assets/icons/message-notification.svg';
 import Login from '@/assets/icons/login.svg';
 
 // These icons should be arranged alphabetically for easy sorting
 
 const icons = {
   Danger,
-  Envelope,
+  Message,
+  MessageNotification,
   Login
 }
 

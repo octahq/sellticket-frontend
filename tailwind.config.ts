@@ -37,24 +37,32 @@ export default {
 				neutral: {//renamed from BG in the design
 					100: '#FAFAFA',
 					200: '#F5F5F5F5',
-					300: '#E6E6E6'
+					300: '#E6E6E6',
+					400: '#E1E1E180'
 				},
 				danger: {
 					100: '#FCEFEF',
+					300: '#DE8787',
 					500: '#C5292A'
+				},
+				success: {
+					100: '#F4FFF280',
+					300: '#87B180',
+					400: '#5E9756',
 				},
 				warning: {
 					500: '#FFAC00'
 				},
 				lines: {
-					100: '#EFEFEF'
+					100: '#EFEFEF',
+					200: '#E5E5E5' 
 				},
 				stroke: {
 					100: '#F1F1F1',
 					200: '#E8EAEA',
 					300: '#ECECEC',
 					400: '#A0A0A0',
-					500: '#9C9C9C'
+					500: '#9C9C9C' 
 				}
   		},
 			backgroundImage: {
