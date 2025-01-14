@@ -1,3 +1,9 @@
 name: sellticket-frontend
+nextjs:
+    packageManager: npm
+    path: .
+    scripts:
+        deploy:
+            - yarn install
 region: us-east-1
 yamlVersion: 2
