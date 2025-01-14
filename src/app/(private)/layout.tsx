@@ -1,9 +1,9 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import Sidebar from '@/components/Layout/AuthLayout/Sidebar';
+import Sidebar from '@/components/Layout/ProtectedLayout/Sidebar';
 import { useMediaQuery } from '@/hooks/use-media-query';
-import Header from '@/components/Layout/AuthLayout/Header';
+import Header from '@/components/Layout/ProtectedLayout/Header';
 
 export default function RootLayout({
   children,

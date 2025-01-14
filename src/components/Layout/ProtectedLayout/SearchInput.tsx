@@ -8,7 +8,7 @@ const SearchInput = () => {
       <Search className="w-[16px] h-[16px] text-[#828282]" />
 
       {/* Input Field */}
-      <input
+      <Input
         type="text"
         placeholder="Search"
         className="ml-[8px] w-full bg-transparent text-[14px] text-[#333333] placeholder:text-[#828282] outline-none"
