@@ -74,7 +74,7 @@ export const AnalyticsIcon = ({ fill }: IconProps) => (
   </svg>
 );
 
-export const FinanceIcon = ({ fill }: IconProps) => (
+export const FinanceIcon = ({ fill, innerFill }: IconProps) => (
   <svg
     width="20"
     height="20"
@@ -88,15 +88,15 @@ export const FinanceIcon = ({ fill }: IconProps) => (
     />
     <path
       d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z"
-      fill="white"
+      fill={innerFill}
     />
     <path
       d="M4.58331 12.7084C4.24165 12.7084 3.95831 12.4251 3.95831 12.0834V7.91675C3.95831 7.57508 4.24165 7.29175 4.58331 7.29175C4.92498 7.29175 5.20831 7.57508 5.20831 7.91675V12.0834C5.20831 12.4251 4.92498 12.7084 4.58331 12.7084Z"
-      fill="white"
+      fill={innerFill}
     />
     <path
       d="M15.4167 12.7084C15.075 12.7084 14.7917 12.4251 14.7917 12.0834V7.91675C14.7917 7.57508 15.075 7.29175 15.4167 7.29175C15.7584 7.29175 16.0417 7.57508 16.0417 7.91675V12.0834C16.0417 12.4251 15.7584 12.7084 15.4167 12.7084Z"
-      fill="white"
+      fill={innerFill}
     />
   </svg>
 );

@@ -48,9 +48,9 @@ export const sidebarItems: SidebarItem[] = [
     id: 5,
     name: 'Finance',
     path: '/finance',
-    icon: <FinanceIcon fill="#6B6B6B" />,
-    sec: <FinanceIcon fill="#D4FF5F" />,
-    hover: <FinanceIcon fill="#D4FF5F" />,
+    icon: <FinanceIcon fill="#6B6B6B" innerFill="white" />,
+    sec: <FinanceIcon fill="#D4FF5F" innerFill="#121212" />,
+    hover: <FinanceIcon fill="#D4FF5F" innerFill="#121212" />,
   },
   {
     id: 6,

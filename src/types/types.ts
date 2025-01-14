@@ -3,6 +3,7 @@ import React from 'react';
 // Define props for icon components
 export type IconProps = {
   fill: string;
+  innerFill?: string;
 };
 
 // Define the structure for sidebar items

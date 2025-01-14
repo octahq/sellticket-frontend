@@ -31,7 +31,7 @@ const Sidebar = () => {
                   className={cn(
                     'flex items-center gap-4 px-4 py-3 rounded-[10px] text-sm font-medium transition-all duration-200',
                     pathname.includes(item.path)
-                      ? 'bg-[#121212] text-[#D4FF5F] font-medium border-[#34006A] border-2'
+                      ? 'bg-[#121212] text-[#D4FF5F] font-medium '
                       : 'text-[#6B6B6B] hover:bg-[#F5F5F5F5] hover:text-[#6B6B6B] duration-300'
                   )}
                 >
