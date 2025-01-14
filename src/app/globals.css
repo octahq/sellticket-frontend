@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-primary: var(--font-inter);
+  --font-secondary: var(--font-lato);
+}
+
+/* Firefox */
+/* For Firefox 64+ */
+* {
+  scrollbar-color: #0f172b rgba(0, 0, 0, 0.05);
+  scrollbar-width: thin;
+}
+
+/* For Firefox 63 and below */
+* {
+  scrollbar-color: #0f172b rgba(0, 0, 0, 0.05);
+}
+
+/* Microsoft Edge and IE */
+* {
+  -ms-overflow-style: none; /* Hide the scrollbar in IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #0f172b;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #121212; /* Adjust color as needed */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill {
+  background-color: transparent;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: inherit;
+}
+
+body {
+  font-family: var(--font-primary), sans-serif;
+}
+
+.secondary-font {
+  font-family: var(--font-secondary), sans-serif;
+}
+.auth-layout {
+  background-image: url('/auth-background-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
