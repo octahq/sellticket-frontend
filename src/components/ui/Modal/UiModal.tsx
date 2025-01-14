@@ -40,7 +40,7 @@ export default function UiModal({
         style={{
           padding: customPadding
         }}
-        className={`${cardStyle} overflow-hidden ${!customPadding && 'p-4'} border border-lines-100 shadow-modal-shadow`}
+        className={`modal  overflow-hidden  border border-lines-100 shadow-modal-shadow box-border ${cardStyle} ${!customPadding && 'p-4'}`}
       >
         <header
           className={`sticky top-0 left-0 w-full z-50 bg-white flex justify-between items-center py-[3px] ${

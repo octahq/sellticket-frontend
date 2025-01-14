@@ -40,3 +40,7 @@ input[type=number] {
   background-size: cover;
   background-position: center;
 }
+
+.modal {
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
