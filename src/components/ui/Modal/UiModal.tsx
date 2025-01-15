@@ -25,22 +25,22 @@ export default function UiModal({
     if (alignRight)
       return 'fixed top-0 right-0 bottom-0 z-50 h-screen bg-[#fff]';
 
-    return 'fixed z-50 md:top-[10%] left-0 right-0 bottom-0 h-fit max-h-[46%]  mx-auto bg-white rounded-t-[20px]';
+    return 'fixed z-50 md:top-[10%] left-0 right-0 bottom-0 h-fit max-h-[391px] mx-auto bg-white rounded-t-[20px]';
   }, [alignRight]);
 
   if (!isOpen) return <></>;
 
   return (
-    <>
+    <div className='prevent-zoom'>
       <div
-        className="fixed w-full h-full inset-0 flex items-center justify-center z-50 bg-[#12121280]"
+        className="prevent-zoom fixed w-full h-full inset-0 flex items-center justify-center z-50 bg-[#12121280]"
         onClick={onClose}
       />
       <div
         style={{
           padding: customPadding
         }}
-        className={`modal  overflow-hidden  border border-lines-100 shadow-modal-shadow box-border ${cardStyle} ${!customPadding && 'p-4'}`}
+        className={`modal prevent-zoom overflow-hidden  border border-lines-100 shadow-modal-shadow box-border ${cardStyle} ${!customPadding && 'p-4'}`}
       >
         <header
           className={`sticky top-0 left-0 w-full z-50 bg-white flex justify-between items-center py-[3px] ${
@@ -62,6 +62,6 @@ export default function UiModal({
           {children}
         </div>
       </div>
-    </>
+    </div>
   );
 }

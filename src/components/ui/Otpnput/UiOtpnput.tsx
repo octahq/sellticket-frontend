@@ -46,7 +46,7 @@ export default function UiOtpInput({ isError, isSuccess, onAutoSubmit }: Props) 
       value={otp}
       onChange={handleChange} 
       renderInput={(props) => <input {...props} type="number"
-      className={`min-w-14 h-14 rounded-2xl font-semibold border-[1.5px] ${validationStyles}`} 
+      className={`min-w-14 h-14 rounded-2xl font-semibold border-[1.5px]  ${validationStyles}`} 
       />}
     />
   )

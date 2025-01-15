@@ -36,7 +36,7 @@ export default function Page() {
           onClose={()=>{}}
           customPadding='18px 24px 40px'
           >
-          <div className="max-h-[calc(43vh-30px)] overflow-y-auto pt-4">
+          <div className="pt-8 pb-[34px] box-border">
             <div className="w-fit mx-auto">
               <UiIcon icon="MessageSparkle" size="42"/>
             </div>

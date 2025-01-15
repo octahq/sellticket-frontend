@@ -52,8 +52,8 @@ export default function Page() {
           onClose={() => {}}
           customPadding='18px 24px 0px'
         >
-          <div className="relative overflow-auto max-h-[calc(43vh-30px)] pb-10 border border-red-600">
-            <div className="sticky top-0 h-[89px] bg-white flex justify-center items-center z-10 w-full mx-auto  mb-8 pt-4">
+          <div className="pt-8 pb-[34px] box-border">
+            <div className="bg-white flex justify-center items-center w-full mx-auto mb-8">
               <SellticketLogoFull/>
             </div>
             <SignInForm  onSubmitForm={submitData}/>

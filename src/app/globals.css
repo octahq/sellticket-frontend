@@ -44,3 +44,7 @@ input[type=number] {
 .modal {
   padding-bottom: env(safe-area-inset-bottom, 16px);
 }
+
+.prevent-zoom {
+  touch-action: manipulation; 
+}

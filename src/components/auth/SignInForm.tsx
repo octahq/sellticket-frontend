@@ -7,7 +7,6 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 import useObjectState from "@/hooks/useObjectState";
 
@@ -25,7 +24,6 @@ interface Props {
 }
 
 export default function SignInForm({onSubmitForm}: Props) {
-  const router = useRouter()
   const formData = useObjectState({
     email: ''
   })
