@@ -33,7 +33,7 @@ export default function UiModal({
   return (
     <div className='prevent-zoom'>
       <div
-        className="prevent-zoom fixed w-full h-full inset-0 flex items-center justify-center z-50 bg-[#12121280]"
+        className="prevent-zoom fixed w-full h-full inset-0 p-96 flex items-center justify-center z-50 bg-[#12121280]"
         onClick={onClose}
       />
       <div

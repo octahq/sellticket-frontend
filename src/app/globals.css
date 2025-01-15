@@ -66,6 +66,11 @@ input[type=number] {
   appearance: textfield;
 }
 
+/* prevent otp-input from auto-focusing on submit */
+.otp-input{
+  user-select: none; 
+}
+
 body {
   font-family: var(--font-primary), sans-serif;
 }

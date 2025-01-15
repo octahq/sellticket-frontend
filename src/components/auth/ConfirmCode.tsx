@@ -9,7 +9,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import UiIcon from "../ui/Icon/UiIcon";
-import UiOtpInput from "../ui/Otpnput/UiOtpnput";
+import UiOtpInput from "../ui/Otpnput/UiOtpInput";
 
 // --
 
@@ -64,7 +64,7 @@ export default function ConfirmCode({ textCenter }:Props) {
         We’ve sent a verification code to your email address. Enter the code below to verify your account
       </p>
       <UiOtpInput isError={isError} isSuccess={isSuccess} onAutoSubmit={onSubmit}/>
-      <div className="flex justify-between items-center mt-4 text-sm">
+      <div className="flex justify-between gap-2 items-center mt-4 text-sm">
         {messageToRender}
         {count > 0 ? <p>{count} secs left</p> : <button onClick={() => setCount(59)} className="font-semibold">Resend code</button>}
       </div>

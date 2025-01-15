@@ -28,8 +28,12 @@ export default function UiOtpInput({ isError, isSuccess, onAutoSubmit }: Props) 
     : 'border-lines-200 bg-neutral-400';  
 
   function handleChange(updatedOtp: string) {
-    setOtp(updatedOtp)
-    console.log(isError);
+    const numberRegex = /^\d+$/;
+
+    //check if value is a number
+    if(numberRegex.test(updatedOtp)){
+      setOtp(updatedOtp)
+    }
 
     if(updatedOtp.length === 5){
       onAutoSubmit(updatedOtp)
@@ -44,9 +48,10 @@ export default function UiOtpInput({ isError, isSuccess, onAutoSubmit }: Props) 
       }}
       numInputs={5}
       value={otp}
-      onChange={handleChange} 
-      renderInput={(props) => <input {...props} type="number"
-      className={`min-w-14 h-14 rounded-2xl font-semibold border-[1.5px]  ${validationStyles}`} 
+      inputType="tel"
+      onChange={handleChange}  
+      renderInput={(props) => <input {...props} type="tel"
+      className={`min-w-14 h-14 rounded-2xl font-semibold border-[1.5px] ${validationStyles}`} 
       />}
     />
   )
