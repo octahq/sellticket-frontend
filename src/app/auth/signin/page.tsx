@@ -27,6 +27,7 @@ export default function Page() {
   function submitData() {
     console.log(formData);
     router.push('/auth/confirm-code')
+    router.push('/auth/confirm-code')
   }
   
   return (
