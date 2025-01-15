@@ -47,6 +47,7 @@ export default {
 				},
 				success: {
 					100: '#F4FFF280',
+					200: '#EAFAE7',
 					300: '#87B180',
 					400: '#5E9756',
 				},
@@ -74,7 +75,8 @@ export default {
 				'input-gradient-error': 'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #C5292A 100%)' 
 			},
 			boxShadow: {
-				'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040'
+				'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040',
+				'modal-shadow': '0px 3.53px 15.87px -3.53px #6A803040'
 			},
   	}
   },

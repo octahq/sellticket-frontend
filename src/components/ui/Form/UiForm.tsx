@@ -1,3 +1,13 @@
+/**
+ * This is the form component wrapper
+ * This component is built around formik and handles form data and field validations
+ * Props:
+ * formData: This is the form data
+ * schema: The schema for validation of the form fields
+ * children: this renders the actual form fields passing the errors object for any validation
+ * onSubmit: Triggering this function submits the form data
+ */
+
 'use client'
 
 import { Formik, FormikErrors } from 'formik';

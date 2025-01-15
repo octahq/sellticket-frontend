@@ -1,3 +1,21 @@
+/**
+ * This is the input component for inputs used accross the application
+ * Props:
+ * -label: This is the label for the input field
+ * -type: what type of input
+ * -name: the name of the input field is used for handling state change in the parent form-data where it belongs. they must be identical to the field in the parent form-data
+ * -value: the value for the input (comes from the form data)
+ * -placeholder: the placeholder for the input field
+ * -variant: variant for the input field if there be any need in the future
+ * -rounded: the amount of border radius to be added to the input field
+ * -size: dictates the height of the input field
+ * -error: validation error for the input field
+ * -disabled: boolean value that diables or enable the input field
+ * -onChange: this is s function that handles state change of the input in the parents form data. it receives the name and value prop of the input to achieve this
+ * -prefixNode: this is used to prepend a node to the input e.g icons
+ * -suffixNode: this is used to append a node to the input e.g icons
+ */
+
 'use client'
 
 import { useMemo, useState } from 'react';
@@ -36,7 +54,6 @@ interface Props {
   name: string;
   error?: React.ReactNode;
   disabled?: boolean;
-  inputRef?: React.RefObject<HTMLInputElement>;
   onChange: (event: { name: string; value: string | null }) => void;
   prefixNode?: React.ReactNode;
   suffixNode?: React.ReactNode;
@@ -84,7 +101,7 @@ export default function UiInput({
           )}
 
           <input
-            className={`w-full flex justify-center items-center text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
+            className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
             placeholder={placeholder}
             type={inputType}
             value={value || ''}

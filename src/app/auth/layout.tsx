@@ -1,4 +1,4 @@
-import SellTicketLogoFull from '@/assets/images/sell-ticket-logo-full.svg';
+import SellticketLogoFull from "@/assets/svgs/sell-ticket-logo-full.svg";
 
 // --
 
@@ -10,9 +10,9 @@ export default function AuthLayout ({
   return (
     <div 
       className="auth-layout relative h-screen bg-primary-50 flex justify-center items-center">
-        <div className='w-36 h-[33px] absolute top-[7.6%] left-[7.6%]'>
-          <SellTicketLogoFull/>
-        </div>
+        <span className='hidden sm:block w-36 h-[33px] absolute top-[7.6%] left-[7.6%]'>
+          <SellticketLogoFull/>
+        </span>
       {children}
     </div>
   )

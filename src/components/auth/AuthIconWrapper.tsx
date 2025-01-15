@@ -1,7 +1,12 @@
+/**
+ * This component the renders the icon for each auth page with the linear gradient background
+ * Props:
+ * -icon: the dedicated icon for the auth page
+ * -paddingRight: this boolean value is added to handle an edgecase in the design
+ */
+
 import { Icons } from "../ui/Icon/UiIcon";
 import UiIcon from "../ui/Icon/UiIcon";
-
-
 
 export default function AuthIconWrapper({ icon, paddingRight }: { icon: Icons, paddingRight?: boolean }) {
   return (
