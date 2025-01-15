@@ -101,7 +101,7 @@ export default function UiInput({
           )}
 
           <input
-            className={`w-full flex justify-center items-center text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
+            className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
             placeholder={placeholder}
             type={inputType}
             value={value || ''}
