@@ -15,11 +15,16 @@ export default function RootLayout({
   return (
     <div className="h-screen overflow-hidden">
       {/* Main Grid */}
-      <main className="grid lg:grid-cols-5 h-full">
+      <main
+        className={cn(
+          'grid h-full',
+          isSmallScreen ? 'grid-cols-1' : '[grid-template-columns:280px_1fr]'
+        )}
+      >
         {/* Sidebar */}
         <div
           className={cn(
-            'w-[280px] h-full overflow-y-auto bg-gray-100',
+            'h-full overflow-y-auto bg-gray-100',
             isSmallScreen && 'hidden'
           )}
         >
@@ -27,11 +32,7 @@ export default function RootLayout({
         </div>
 
         {/* Right Side Content */}
-        <div
-          className={cn(
-            'lg:col-span-4 h-full flex flex-col overflow-y-auto bg-white' // Right side scrolls
-          )}
-        >
+        <div className="h-full flex flex-col overflow-y-auto bg-white">
           {/* Header */}
           <Header />
 
