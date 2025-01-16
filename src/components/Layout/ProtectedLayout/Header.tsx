@@ -43,9 +43,14 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <div className="flex justify-between h-[67px] px-4  items-center w-full">
-            <Image src={logo} alt="sell ticket logo" className="w-[120px]" />
-            <div className=" w-[34px] h-[34px] grid place-items-center border-[#5B5B5B] border-2 rounded-full text-xl">
+          <div className="flex justify-between h-[67px] mt-4 pb-6 px-4  items-center w-full text-[#292D32]">
+            <div>
+              <h3 className="font-bold text-xl">Account</h3>
+              <p className="text-sm pt-[2px]">
+                Your account details and balance
+              </p>
+            </div>
+            <div className=" w-[34px] h-[34px]  grid place-items-center rounded-full text-3xl">
               <HiMiniBars3 />
             </div>
           </div>
