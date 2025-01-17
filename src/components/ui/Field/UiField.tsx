@@ -1,3 +1,13 @@
+/**
+ * Button component 
+ * This component hold the labels, errors or hints for inputs
+ * Props:
+ * error: The error message for a particular field
+ * label: The label for the field
+ * hint: Any hint message for the field is provided by this prop
+ * children: This node renders the actual field  i.e text-input, text-area etc
+ */
+
 import React from 'react';
 
 interface Props {

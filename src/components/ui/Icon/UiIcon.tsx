@@ -1,15 +1,26 @@
-import Danger from '@/assets/icons/danger.svg';
-import Message from '@/assets/icons/message.svg';
-import MessageNotification from '@/assets/icons/message-notification.svg';
-import Login from '@/assets/icons/login.svg';
+/**
+ * This component renders icons used throughout the our applications
+ * icons are imported in their svg formats in alphabetical order
+ */
+
+import ArrowLeft from '@/assets/svgs/arrow-left.svg';
+import Danger from '@/assets/svgs/danger.svg';
+import Message from '@/assets/svgs/message.svg';
+import MessageNotification from '@/assets/svgs/message-notification.svg';
+import MessageSparkle from '@/assets/svgs/message-sparkle.svg';
+import Login from '@/assets/svgs/login.svg';
+import X from '@/assets/svgs/x.svg';
 
 // These icons should be arranged alphabetically for easy sorting
 
 const icons = {
+  ArrowLeft,
   Danger,
   Message,
   MessageNotification,
-  Login
+  MessageSparkle,
+  Login,
+  X,
 }
 
 export type Icons = keyof typeof icons;

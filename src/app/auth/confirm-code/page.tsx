@@ -1,29 +1,49 @@
 'use client'
 
-import { useState } from "react";
+/**
+ * Confirm code page
+ * Renders the confirm code component
+ */
+
+import Link from "next/link";
 
 import AuthCard from "@/components/auth/AuthCard";
 import AuthIconWrapper from "@/components/auth/AuthIconWrapper";
-import UiOtpInput from "@/components/ui/Otpnput/UiOtpnput";
+import ConfirmCode from "@/components/auth/ConfirmCode";
 import UiIcon from "@/components/ui/Icon/UiIcon";
+import UiModal from "@/components/ui/Modal/UiModal";
+
+// --
 
 export default function Page() {
-  // const [isError, setIs] 
-  function onSubmit(otp: string) {
-    console.log(otp);
-  }
   return (
-    <AuthCard>
-      <AuthIconWrapper icon="MessageNotification"/>
-      <h2 className="text-2xl font-semibold mb-1 mt-3">Confirm verification code</h2>
-      <p className="text-sm mb-8 text-stroke-500 font-normal">
-        We’ve sent a verification code to your email address. Enter the code below to verify your account
-      </p>
-      <UiOtpInput onAutoSubmit={onSubmit}/>
-      <div className="flex justify-between items-center mt-4 text-sm">
-        <p className="text-secondary-100">Did not receive your code yet?</p>
-        <button>6 secs left</button>
+    <>
+      <div className="hidden md:block">
+        <AuthCard>
+          <AuthIconWrapper icon="MessageNotification"/>
+          <ConfirmCode/>
+        </AuthCard>
       </div>
-    </AuthCard>
+      <div className="block md:hidden">
+        <UiModal 
+          title={
+            <Link href='/auth/signin'
+              className='shrink-0 w-6 h-6 rounded-full flex justify-center items-center bg-stroke-200'>
+              <UiIcon icon='ArrowLeft' size="14"/>
+            </Link>
+          } 
+          isOpen 
+          onClose={()=>{}}
+          customPadding='18px 24px 40px'
+          >
+          <div className="pt-8 pb-[34px] box-border">
+            <div className="w-fit mx-auto">
+              <UiIcon icon="MessageSparkle" size="42"/>
+            </div>
+            <ConfirmCode textCenter/>
+          </div>
+        </UiModal>
+      </div>
+    </>
   )
 }

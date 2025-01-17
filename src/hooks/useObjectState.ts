@@ -1,3 +1,14 @@
+/**
+ * This is a hook that makes handling object state easier  
+ * This hook handles setting and mutating object state
+ * Props: 
+ * -data: this is the default data or initial data 
+ * Functions:
+ * -set: this function sets a value in the object
+ * -setDeep: this function handles the mutation of deep rooted data
+ * -reset: this function resets the date to it's initial value
+ */
+
 'use client'
 
 import { useState } from 'react';
