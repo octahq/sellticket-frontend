@@ -6,12 +6,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useOutsideClick } from '@/hooks/use-outside-click';
 import featuredIcon from '../../assets/images/featuredIcon.png';
 import { IoCloseOutline } from 'react-icons/io5';
-import { withdrawalMethods } from '../../common/constants';
+import { withdrawalMethods } from '../common/constants';
 import bankTransferIcon from '../../assets/images/bank-transfericon.png';
 import walletTransferIcon from '../../assets/images/wallettransfer.png';
 import { LiaCircleSolid } from 'react-icons/lia';
 import { BsCheckCircleFill } from 'react-icons/bs';
-import { Button } from '../button';
+import { Button } from '../ui/button';
 
 interface Props {
   active: boolean;
