@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { financeWalletTab } from '../../common/constants';
 import bgImg from '../../../assets/images/vector.png';
 import { Button } from '../../ui/button';
-import { WithdrawalMethod } from '@/components/modals/WithdrawalMethod';
+import { WithdrawalMethod } from '@/components/ui/Modal/WithdrawalMethod';
 
 const FirstLayer = () => {
   const [activeTab, setActiveTab] = useState(financeWalletTab[0]?.id);
