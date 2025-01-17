@@ -59,7 +59,7 @@ const FirstLayer = () => {
                 </p>
               </div>
               <Button
-                className="primary-btn w-fit mt-4 md:mt-0"
+                className="primary-btn rounded-[10px] w-fit mt-4 md:mt-0"
                 onClick={() => setIsOpen(true)}
               >
                 Withdraw

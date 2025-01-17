@@ -32,7 +32,7 @@ const SecondLayer = () => {
       </div>
 
       <div className="justify-between items-center pt-2 hidden md:flex">
-        <div className="h-[40px]">
+        <div className="h-[30px]">
           <SearchInput
             placeholder="Search items"
             value={searchTerm} // Bind value to state
@@ -55,7 +55,7 @@ const SecondLayer = () => {
         <CustomTable headers={transHeaders} skeletonRows={4}>
           {fetchedTransactions?.length ? (
             fetchedTransactions.map((row, rowIndex) => (
-              <TableRow key={rowIndex} className="border-0">
+              <TableRow key={rowIndex} className="border-0 text-[#5B5B5B]">
                 <TableCell>
                   <div className="w-[32px] bg-[#F8D0B8] overflow-hidden p-[4px] aspect-square rounded-full">
                     <div className="rounded-full overflow-hidden">
@@ -63,7 +63,12 @@ const SecondLayer = () => {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>{row.name}</TableCell>
+                <TableCell>
+                  <div>
+                    {row.name}
+                    <p className="text-xs text-[#8D9091]">{row.id}</p>
+                  </div>
+                </TableCell>
                 <TableCell>
                   {row.type === 'debit' ? 'Outflow' : 'Inflow'}
                 </TableCell>

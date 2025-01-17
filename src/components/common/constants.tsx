@@ -89,7 +89,7 @@ export const transHeaders = [
 ];
 
 export const fetchedTransactions: {
-  id: number;
+  id: string;
   logo: StaticImageData;
   name: string;
   type: string;
@@ -99,7 +99,7 @@ export const fetchedTransactions: {
   status: string;
 }[] = [
   {
-    id: 0,
+    id: '#1234578900',
     logo: bankImg,
     name: 'Octa tickera fx',
     type: 'debit',
@@ -109,7 +109,7 @@ export const fetchedTransactions: {
     status: 'Successful',
   },
   {
-    id: 1,
+    id: '#1234578900',
     logo: bankImg,
     name: 'Octa tickera fx',
     type: 'debit',
