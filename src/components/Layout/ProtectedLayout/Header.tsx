@@ -2,8 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { HiMiniBars3 } from 'react-icons/hi2';
 import { useMediaQuery } from '@/hooks/use-media-query';
-import Image from 'next/image';
-import logo from '../../../assets/images/sell-ticket-logo-full.png';
 import { Badge } from '@/components/ui/badge';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -43,7 +41,7 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <div className="flex justify-between h-[67px] mt-4 pb-6 px-4  items-center w-full text-[#292D32]">
+          <div className="flex justify-between h-[67px] mt-8 pb-8 px-4  items-center w-full text-[#292D32]">
             <div>
               <h3 className="font-bold text-xl">Account</h3>
               <p className="text-sm pt-[2px]">

@@ -40,9 +40,15 @@ export default function RootLayout({
           <div
             className={cn(
               'flex-1 pb-16 max-w-[1177px]',
-              isSmallScreen ? 'px-4 mt-20' : 'px-6 pt-28'
+              isSmallScreen ? 'px-5 mt-24' : 'px-6 pt-28'
             )}
           >
+            <div className="hidden md:block">
+              <h3 className="font-bold text-xl">Account</h3>
+              <p className="text-sm pt-[2px]">
+                Your account details and balance
+              </p>
+            </div>
             {children}
           </div>
         </div>
