@@ -22,7 +22,7 @@ const SecondLayer = () => {
   return (
     <div>
       <div className="flex flex-wrap justify-between items-center  mt-10">
-        <h5 className="font-semibold text-[#0D0D0D]">Transaction history</h5>
+        <h5 className="font-medium text-[#0D0D0D]">Transaction history</h5>
         <Button
           className="border  md:hidden  border-[#AFCBAA] bg-[#E6F7E3] py-[2px] px-2 rounded-xl"
           onClick={() => router.push('/finance/view-all-transactions')}
@@ -32,7 +32,7 @@ const SecondLayer = () => {
       </div>
 
       <div className="justify-between items-center pt-2 hidden md:flex">
-        <div className="h-[30px]">
+        <div className="h-[40px]">
           <SearchInput
             placeholder="Search items"
             value={searchTerm} // Bind value to state

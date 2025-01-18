@@ -50,7 +50,7 @@ const FirstLayer = () => {
                   <p className="text-[#616162] text-sm md:text-base">
                     {tab.value}
                   </p>
-                  <button className="text-xs text-[#616162] border-2 border-[#DADADA] bg-[#F2F2F2] rounded-3xl p-[4px]">
+                  <button className="text-[8px] md:text-xs text-[#616162] border-2 border-[#DADADA] bg-[#F2F2F2] rounded-3xl p-[4px]">
                     Show
                   </button>
                 </div>

@@ -2,32 +2,25 @@
 
 import { cn } from '@/lib/utils';
 import Sidebar from '@/components/Layout/ProtectedLayout/Sidebar';
-import { useMediaQuery } from '@/hooks/use-media-query';
 import Header from '@/components/Layout/ProtectedLayout/Header';
+import '../../styles/authenticatedLayoutStyles.css';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isSmallScreen = useMediaQuery('(max-width: 999px)');
-
   return (
     <div className="h-screen overflow-hidden">
       {/* Main Grid */}
       <main
         className={cn(
           'grid h-full',
-          isSmallScreen ? 'grid-cols-1' : '[grid-template-columns:280px_1fr]'
+          '[grid-template-columns:280px_1fr] hide-sidebar:grid-cols-1'
         )}
       >
         {/* Sidebar */}
-        <div
-          className={cn(
-            'h-full overflow-y-auto bg-gray-100',
-            isSmallScreen && 'hidden'
-          )}
-        >
+        <div className="h-full overflow-y-auto bg-gray-100 hide-sidebar">
           <Sidebar />
         </div>
 
@@ -40,7 +33,7 @@ export default function RootLayout({
           <div
             className={cn(
               'flex-1 pb-16 max-w-[1177px]',
-              isSmallScreen ? 'px-5 mt-24' : 'px-6 pt-28'
+              'px-6 pt-28 hide-sidebar:px-5 hide-sidebar:mt-24'
             )}
           >
             <div className="hidden md:block">
