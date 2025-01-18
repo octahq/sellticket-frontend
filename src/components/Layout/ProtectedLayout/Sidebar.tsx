@@ -14,7 +14,7 @@ const Sidebar = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <aside className="relative  bg-white h-full border-r-[1px] border-[#EDEDED]">
+    <aside className="relative z-40 bg-white h-full border-r-[1px] border-[#EDEDED]">
       <div className="pt-7 ml-6 border-[#E0E0E0]">
         <Image
           className="w-[129px] h-[33px]"

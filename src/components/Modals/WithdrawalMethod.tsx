@@ -50,14 +50,14 @@ export function WithdrawalMethod({ active, setActive }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 h-full w-full z-10"
+            className="fixed inset-0 bg-black/60 h-full w-full z-40"
           />
         )}
       </AnimatePresence>
 
       <AnimatePresence>
         {active && (
-          <div className="fixed inset-0 grid place-items-center z-[999]">
+          <div className="fixed inset-0 grid place-items-center z-50">
             <motion.div
               layoutId={`card-${id}`}
               ref={ref}
