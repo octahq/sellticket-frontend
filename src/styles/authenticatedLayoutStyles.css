@@ -1,4 +1,7 @@
 @media (max-width: 999px) {
+  .mobile-col {
+    @apply grid-cols-1;
+  }
   .hide-sidebar {
     display: none;
   }

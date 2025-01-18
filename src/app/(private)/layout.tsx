@@ -16,7 +16,7 @@ export default function RootLayout({
       <main
         className={cn(
           'grid h-full',
-          '[grid-template-columns:280px_1fr] hide-sidebar:grid-cols-1'
+          'mobile-col [grid-template-columns:280px_1fr]'
         )}
       >
         {/* Sidebar */}
