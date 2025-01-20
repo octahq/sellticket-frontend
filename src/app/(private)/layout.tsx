@@ -40,7 +40,7 @@ export default function RootLayout({
           <div
             className={cn(
               'flex-1 pb-16 max-w-[1177px]',
-              isSmallScreen ? 'px-4 mt-20' : 'px-6 pt-28'
+              isSmallScreen ? 'px-4 mt-20' : 'px-6 pl-[70px] pt-28'
             )}
           >
             {children}

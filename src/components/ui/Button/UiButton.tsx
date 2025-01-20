@@ -16,13 +16,14 @@
 import { MouseEventHandler } from 'react';
 
 const variantClasses = {
-  primary: 'bg-secondary-gradient text-white hover:border-red-300'
+  primary: 'bg-secondary-gradient text-white hover:border-red-300',
+  tertiary: 'bg-secondary-700 text-white'
 };
 
 const sizeClasses = {
   lg: 'h-[46px]  text-base px-6',
   md: 'h-10 text-sm px-8',
-  sm: '',
+  sm: 'h-8 text-xs px-[9px]',
 };
 
 const radiusClasses = {
@@ -40,6 +41,8 @@ interface Props {
   roundedVariant?: keyof typeof radiusClasses;
   size?: keyof typeof sizeClasses;
   type?: 'button' | 'submit';
+  // If there is a need to add extra classes the to improve flexibility.This is a hack.
+  injectedClasses?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -50,17 +53,18 @@ export default function UiButton({
   loading,
   size = 'lg',
   roundedVariant = 'lg',
+  injectedClasses = '',
   type = 'submit',
   block,
   onClick,
 }: Props) {
   return (
     <button
-      className={`flex gap-2 items-center justify-center whitespace-nowrap  ${
+      className={`flex items-center justify-center whitespace-nowrap  ${
       block ? 'w-full' : ''
     } ${variantClasses[variant]} ${sizeClasses[size]}  ${
         disabled && 'opacity-50 cursor-not-allowed'
-      } ${radiusClasses[roundedVariant]}`}
+      } ${radiusClasses[roundedVariant]}  ${injectedClasses}`}
       disabled={disabled || loading}
       type={type}
       onClick={onClick}

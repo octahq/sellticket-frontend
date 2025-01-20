@@ -38,7 +38,8 @@ export default {
 					100: '#FAFAFA',
 					200: '#F5F5F5F5',
 					300: '#E6E6E6',
-					400: '#E1E1E180'
+					400: '#E1E1E180',
+					500: '#F4F4F4',
 				},
 				danger: {
 					100: '#FCEFEF',
@@ -67,6 +68,7 @@ export default {
 				}
   		},
 			backgroundImage: {
+				'avatar-gradient-primary': 'linear-gradient(270deg, rgba(221, 224, 228, 0.24) 0%, rgba(221, 224, 228, 0) 39.6%)',
 				'primary-gradient': 'linear-gradient(360deg, #D4FF5F 8.93%, #E2FF94 100%)', 
 				'secondary-gradient': 'linear-gradient(360deg, #292D32 8.93%, #56606B 100%)',
 				'auth-icon-wrapper-bg': 'linear-gradient(132.46deg, #292D32 0%, #8D9091 100%)',
@@ -76,7 +78,10 @@ export default {
 			},
 			boxShadow: {
 				'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040',
-				'modal-shadow': '0px 3.53px 15.87px -3.53px #6A803040'
+				'primary-tab-shadow': '0px 0px 0px 1px #0000000D',
+				'event-card-shadow': '0px 0px 6px 0px #5B5B5B33',
+				'drop-down-shadow': '0px 4px 15px 0px #B6B6B640',
+
 			},
   	}
   },
