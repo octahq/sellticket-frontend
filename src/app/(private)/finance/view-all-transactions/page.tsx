@@ -11,8 +11,8 @@ import {
   fetchedTransactions,
   transHeaders,
 } from '@/components/common/constants';
-import { TableCell, TableRow } from '@/components/ui/table';
-// import emptyState from '@/assets/images/emptystate.svg';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import emptyState from '@/assets/images/noresult.png';
 import Image from 'next/image';
 
 const ViewAllTransactions = () => {
@@ -74,27 +74,31 @@ const ViewAllTransactions = () => {
                 </li>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={transHeaders.length}
-                  className="text-center py-6"
-                >
-                  <div className="flex flex-col items-center">
-                    {/* <image
-                      src={emptyState}
-                      alt="No Transactions"
-                      className="w-20 h-20 mb-4"
-                    /> */}
-                    <p className="text-lg font-semibold text-gray-700">
-                      No Transactions Yet
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Send money, fund accounts, make bills payment to record
-                      transactions
-                    </p>
-                  </div>
-                </TableCell>
-              </TableRow>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell
+                      colSpan={transHeaders.length}
+                      className="text-center py-6"
+                    >
+                      <div className="flex flex-col items-center">
+                        <Image
+                          src={emptyState}
+                          alt="No Transactions"
+                          className="w-20 h-20 mb-4"
+                        />
+                        <p className="font-semibold text-[#292D32]">
+                          There’s nothing here, yet
+                        </p>
+                        <p className="text-xs text-[#929292]">
+                          Make your first withdrawal so you can see your
+                          transaction history here
+                        </p>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             )}
           </ul>
         </div>

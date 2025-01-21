@@ -108,10 +108,17 @@ export function WithdrawalMethod({ active, setActive }: Props) {
                       }}
                       onClick={() => setWithdrawalMethod(item.title)}
                     >
-                      <Image
-                        src={i === 0 ? bankTransferIcon : walletTransferIcon}
-                        alt="withdrawal icons"
-                      />
+                      {i == 0 ? (
+                        <Image src={bankTransferIcon} alt="withdrawal icons" />
+                      ) : (
+                        <div className="w-[32px] aspect-square bg-[#EAF4FF] py-[7px] px-[8px] grid place-items-center rounded-full">
+                          <Image
+                            src={walletTransferIcon}
+                            alt="withdrawal icons"
+                          />
+                        </div>
+                      )}
+
                       <div>
                         <h3>{item.title}</h3>
                         <p className="text-sm text-[#6B6A6A]">{item.text}</p>

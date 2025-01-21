@@ -10,21 +10,23 @@ import {
   transHeaders,
 } from '@/components/common/constants';
 import CustomTable from '@/components/ui/CustomTable/CustomTable';
-import { TableCell, TableRow } from '@/components/ui/table';
-// import emptyState from '../../../../public/emptystate.svg';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import emptyState from '../../../assets/images/noresult.png';
 import { useRouter } from 'next/navigation';
+import { MobileTransactionDetails } from '@/components/Modals/MobileTransactionDetails';
 
 const SecondLayer = () => {
   const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   return (
     <div>
       <div className="flex flex-wrap justify-between items-center  mt-10">
         <h5 className="font-medium text-[#0D0D0D]">Transaction history</h5>
         <Button
-          className="border  md:hidden  border-[#AFCBAA] bg-[#E6F7E3] py-[2px] px-2 rounded-xl"
+          className="border font-normal text-xs  md:hidden  border-[#AFCBAA] bg-[#E6F7E3] py-[4px] px-2 rounded-xl"
           onClick={() => router.push('/finance/view-all-transactions')}
         >
           View all
@@ -55,7 +57,10 @@ const SecondLayer = () => {
         <CustomTable headers={transHeaders} skeletonRows={4}>
           {fetchedTransactions?.length ? (
             fetchedTransactions.map((row, rowIndex) => (
-              <TableRow key={rowIndex} className="border-0 text-[#5B5B5B]">
+              <TableRow
+                key={rowIndex}
+                className="  text-[#5B5B5B] !border-none"
+              >
                 <TableCell>
                   <div className="w-[32px] bg-[#F8D0B8] overflow-hidden p-[4px] aspect-square rounded-full">
                     <div className="rounded-full overflow-hidden">
@@ -95,17 +100,17 @@ const SecondLayer = () => {
                 className="text-center py-6"
               >
                 <div className="flex flex-col items-center">
-                  {/* <Image
+                  <Image
                     src={emptyState}
                     alt="No Transactions"
                     className="w-20 h-20 mb-4"
-                  /> */}
-                  <p className="text-lg font-semibold text-gray-700">
-                    No Transactions Yet
+                  />
+                  <p className="font-semibold text-[#292D32]">
+                    There’s nothing here, yet
                   </p>
-                  <p className="text-sm text-gray-500">
-                    Send money, fund accounts, make bills payment to record
-                    transactions
+                  <p className="text-xs text-[#929292]">
+                    Make your first withdrawal so you can see your transaction
+                    history here
                   </p>
                 </div>
               </TableCell>
@@ -117,55 +122,68 @@ const SecondLayer = () => {
       <div className="pt-5 md:hidden">
         <p className="text-sm text-[#5B5B5B] font-semibold pb-3"> Today</p>
         <div>
-          <ul className="grid  gap-4">
-            {fetchedTransactions?.length ? (
-              fetchedTransactions.map((row, rowIndex) => (
-                <li
-                  key={rowIndex}
-                  className="flex items-center justify-between font-medium text-sm"
-                >
-                  <div className="flex gap-2 flex-2">
-                    <div className="w-[32px] bg-[#F8D0B8] overflow-hidden p-[4px] aspect-square rounded-full grid place-items-center">
-                      <div className="rounded-full overflow-hidden">
-                        <Image src={row.logo} alt="bank logo" />
+          <section>
+            <ul className="grid  gap-4">
+              {fetchedTransactions?.length ? (
+                fetchedTransactions.map((row, rowIndex) => (
+                  <li
+                    key={rowIndex}
+                    className="flex items-center justify-between font-medium text-sm"
+                    onClick={() => setIsShow(true)}
+                  >
+                    <div className="flex gap-2 flex-2">
+                      <figure className="w-[32px] bg-[#F8D0B8] overflow-hidden p-[4px] aspect-square rounded-full grid place-items-center">
+                        <div className="rounded-full overflow-hidden">
+                          <Image src={row.logo} alt={`${row.name} logo`} />
+                        </div>
+                      </figure>
+                      <div>
+                        <p>{row.name}</p>
+                        <time className="text-[#8D9091] text-xs">
+                          {row.time}
+                        </time>
                       </div>
                     </div>
                     <div>
-                      <p>{row.name}</p>
-                      <p className="text-[#8D9091] text-xs">{row.time}</p>
+                      <p>₦{row.price}</p>
                     </div>
-                  </div>
-                  <div>
-                    <p>₦{row.price}</p>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={transHeaders.length}
-                  className="text-center py-6"
-                >
-                  <div className="flex flex-col items-center">
-                    {/* <image
-                      // src={emptyState}
-                      alt="No Transactions"
-                      className="w-20 h-20 mb-4"
-                    /> */}
-                    <p className="text-lg font-semibold text-gray-700">
-                      No Transactions Yet
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Send money, fund accounts, make bills payment to record
-                      transactions
-                    </p>
-                  </div>
-                </TableCell>
-              </TableRow>
-            )}
-          </ul>
+                  </li>
+                ))
+              ) : (
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell
+                        colSpan={transHeaders.length}
+                        className="text-center py-6"
+                      >
+                        <div className="flex flex-col items-center">
+                          <Image
+                            src={emptyState}
+                            alt="No Transactions"
+                            className="w-20 h-20 mb-4"
+                          />
+                          <p className="font-semibold text-[#292D32]">
+                            There’s nothing here, yet
+                          </p>
+                          <p className="text-xs text-[#929292]">
+                            Make your first withdrawal so you can see your
+                            transaction history here
+                          </p>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              )}
+            </ul>
+          </section>
         </div>
       </div>
+      <MobileTransactionDetails
+        isShow={isShow}
+        setIsShow={() => setIsShow(false)}
+      />
     </div>
   );
 };

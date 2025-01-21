@@ -23,7 +23,7 @@ const CustomTable: React.FC<CustomTableProps> = ({
 }) => {
   return (
     <div className="relative w-full overflow-x-auto">
-      <div className="w-full  max-h-96 rounded-lg border-b-[#EFEFEF] border-b-2">
+      <div className="w-full  max-h-96 rounded-lg ">
         <Table className="w-full capitalize font-semibold">
           {/* Table Header */}
           <TableHeader className="bg-white text-[#5B5B5B] text-sm ">
