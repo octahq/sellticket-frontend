@@ -11,15 +11,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
-import UiIcon from "../Icon/UiIcon";
+import UiIcon from '../Icon/UiIcon';
 
 export type DropDownData = {
   label: React.ReactNode;
   func: (id?: string) => void;
   disabled?: boolean;
-}
+};
 
 interface Props {
   options: DropDownData[];
@@ -29,23 +29,26 @@ interface Props {
 
 export default function UiDropDown({ options, trigger, itemId }: Props) {
   return (
-  <DropdownMenu>
-    <DropdownMenuTrigger className="outline-none ">
-      {trigger || <UiIcon icon="ThreeDotsVertical" size="24"/>}
-    </DropdownMenuTrigger>
-    <DropdownMenuContent side="right" align="start" className="bg-[#F0F0F0] rounded-[10px] border border-[#E4E4E4] p-1 shadow-drop-down-shadow">
-      {options.map((option, index)=>(
-        <DropdownMenuItem 
-          key={index} 
-          className="text-xs cursor-pointer hover:bg-[#E9E9E9] rounded-[5px]"
-          disabled={option.disabled}
-          onClick={() => option.func(itemId)}
-        >
-          {option.label}
-        </DropdownMenuItem>
-      ))}
-    </DropdownMenuContent>
-  </DropdownMenu>
-
-  )
+    <DropdownMenu>
+      <DropdownMenuTrigger className="outline-none ">
+        {trigger || <UiIcon icon="ThreeDotsVertical" size="24" />}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        side="right"
+        align="start"
+        className="bg-[#F0F0F0] rounded-[10px] border border-[#E4E4E4] p-1 shadow-drop-down-shadow"
+      >
+        {options.map((option, index) => (
+          <DropdownMenuItem
+            key={index}
+            className="text-xs cursor-pointer hover:bg-[#E9E9E9] rounded-[5px]"
+            disabled={option.disabled}
+            onClick={() => option.func(itemId)}
+          >
+            {option.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }

@@ -43,7 +43,7 @@
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #121212; 
+  -webkit-text-fill-color: #121212;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -54,21 +54,21 @@ input:-webkit-autofill {
 }
 
 /* remove the number input default up and down arrows  */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
   -ms-appearance: textfield;
   appearance: textfield;
 }
 
 /* prevent otp-input from auto-focusing on submit */
-.otp-input{
-  user-select: none; 
+.otp-input {
+  user-select: none;
 }
 
 body {
@@ -90,5 +90,42 @@ body {
 }
 
 .prevent-zoom {
-  touch-action: manipulation; 
+  touch-action: manipulation;
+}
+
+.ui-avatar svg {
+  border-radius: 100%;
+}
+
+.hide-scroll-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scroll-bar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* primary button hover */
+
+.primary-button {
+  position: relative;
+}
+.primary-button::after {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  height: 100%;
+  background-color: #56606b;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: inherit;
+  transition: transform 0.3s ease-out 0s;
+}
+.primary-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }

@@ -1,5 +1,5 @@
 /**
- * Button component 
+ * Button component
  * This component hold the labels, errors or hints for inputs
  * Props:
  * error: The error message for a particular field
@@ -17,12 +17,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function UiField({
-  error,
-  label,
-  hint,
-  children,
-}: Props) {
+export default function UiField({ error, label, hint, children }: Props) {
   return (
     <div className="text-left relative">
       <label className="text-sm leading-7 font-ceraRegular text-gray-1000">

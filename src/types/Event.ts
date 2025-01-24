@@ -3,6 +3,6 @@ export default interface Event {
   ticketsSold: number;
   hosts: {
     name: string;
-    avatar: any
-  }[]
+    avatar: any;
+  }[];
 }

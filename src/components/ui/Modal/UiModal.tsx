@@ -31,14 +31,14 @@ export default function UiModal({
   if (!isOpen) return <></>;
 
   return (
-    <div className='prevent-zoom'>
+    <div className="prevent-zoom">
       <div
         className="prevent-zoom fixed w-full h-full inset-0 p-96 flex items-center justify-center z-50 bg-[#12121280]"
         onClick={onClose}
       />
       <div
         style={{
-          padding: customPadding
+          padding: customPadding,
         }}
         className={`modal prevent-zoom overflow-hidden  border border-lines-100 shadow-auth-card-shadow box-border ${cardStyle} ${!customPadding && 'p-4'}`}
       >
@@ -47,20 +47,18 @@ export default function UiModal({
             !alignRight && 'rounded-t-2xl'
           }`}
         >
-          <h2
-            className="flex-1 text-secondary-700 text-xl font-semibold"
-          >
+          <h2 className="flex-1 text-secondary-700 text-xl font-semibold">
             {title}
           </h2>
-          
-          <button onClick={onClose} className='shrink-0 w-6 h-6 rounded-full flex justify-center items-center bg-stroke-200'>
-            <UiIcon icon='X' size='20'/>
+
+          <button
+            onClick={onClose}
+            className="shrink-0 w-6 h-6 rounded-full flex justify-center items-center bg-stroke-200"
+          >
+            <UiIcon icon="X" size="20" />
           </button>
         </header>
-        <div
-        >
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     </div>
   );

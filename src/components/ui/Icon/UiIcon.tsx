@@ -5,6 +5,7 @@
 
 import Add from '@/assets/svgs/add.svg';
 import ArrowLeft from '@/assets/svgs/arrow-left.svg';
+import ArrowRight from '@/assets/svgs/arrow-right.svg';
 import Calendar from '@/assets/svgs/calendar.svg';
 import CalendarEdit from '@/assets/svgs/calendar-edit.svg';
 import Clock from '@/assets/svgs/clock.svg';
@@ -28,6 +29,7 @@ import X from '@/assets/svgs/x.svg';
 const icons = {
   Add,
   ArrowLeft,
+  ArrowRight,
   Calendar,
   CalendarEdit,
   Clock,
@@ -45,7 +47,7 @@ const icons = {
   Trash,
   TwoUser,
   X,
-}
+};
 
 export type Icons = keyof typeof icons;
 interface Props {

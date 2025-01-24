@@ -16,7 +16,7 @@
  * -suffixNode: this is used to append a node to the input e.g icons
  */
 
-'use client'
+'use client';
 
 import { useMemo, useState } from 'react';
 
@@ -84,20 +84,20 @@ export default function UiInput({
     return error ? 'bg-input-gradient-error' : `bg-input-gradient`;
   }, [error]);
 
-  const validatedPlaceholder = useMemo(()=> {
-    return error ? 'placeholder:text-danger-500' : 'placeholder:text-stroke-500'
-  }, [error])
+  const validatedPlaceholder = useMemo(() => {
+    return error
+      ? 'placeholder:text-danger-500'
+      : 'placeholder:text-stroke-500';
+  }, [error]);
 
   return (
     <UiField label={label} error={error}>
-      <div className={`h-11 w-full box-border p-[1.5px] rounded-[10px] ${validatedBorder}`}>
-        <div
-          className='relative w-full h-full  bg-neutral-100 flex gap-[5px] px-4 rounded-[9px]'
-        >
+      <div
+        className={`h-11 w-full box-border p-[1.5px] rounded-[10px] ${validatedBorder}`}
+      >
+        <div className="relative w-full h-full  bg-neutral-100 flex gap-[5px] px-4 rounded-[9px]">
           {prefixNode && (
-            <div className="text-sm flex items-center">
-              {prefixNode}
-            </div>
+            <div className="text-sm flex items-center">{prefixNode}</div>
           )}
 
           <input
@@ -110,7 +110,7 @@ export default function UiInput({
             disabled={disabled}
             onChange={sendValue}
           />
-          
+
           {suffixNode && (
             <div className="pl-2 pr-4 text-gray-500 text-sm flex items-center">
               {suffixNode}

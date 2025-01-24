@@ -1,5 +1,5 @@
 /**
- * Button component 
+ * Button component
  * This is the component used for most buttons accross the application
  * Props:
  * -children: This is the node that is meant to be rendered by the component.
@@ -16,8 +16,8 @@
 import { MouseEventHandler } from 'react';
 
 const variantClasses = {
-  primary: 'bg-secondary-gradient text-white hover:border-red-300',
-  tertiary: 'bg-secondary-700 text-white'
+  primary: 'bg-secondary-gradient text-white',
+  tertiary: 'bg-secondary-700 text-white',
 };
 
 const sizeClasses = {
@@ -26,20 +26,26 @@ const sizeClasses = {
   sm: 'h-8 text-xs px-[9px]',
 };
 
-const radiusClasses = {
+export const radiusClasses = {
   lg: 'rounded-[10px]',
   md: 'rounded-md',
-  sm: 'rounded-[4px]'
+  sm: 'rounded-[4px]',
 };
+
+export type Vatiant = keyof typeof variantClasses;
+
+export type Size = keyof typeof sizeClasses;
+
+export type Radius = keyof typeof radiusClasses;
 
 interface Props {
   children: React.ReactNode;
-  variant?: keyof typeof variantClasses;
+  variant?: Vatiant;
   block?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  roundedVariant?: keyof typeof radiusClasses;
-  size?: keyof typeof sizeClasses;
+  roundedVariant?: Radius;
+  size?: Size;
   type?: 'button' | 'submit';
   // If there is a need to add extra classes the to improve flexibility.This is a hack.
   injectedClasses?: string;
@@ -61,8 +67,8 @@ export default function UiButton({
   return (
     <button
       className={`flex items-center justify-center whitespace-nowrap  ${
-      block ? 'w-full' : ''
-    } ${variantClasses[variant]} ${sizeClasses[size]}  ${
+        block ? 'w-full' : ''
+      } ${variantClasses[variant]} ${sizeClasses[size]}  ${
         disabled && 'opacity-50 cursor-not-allowed'
       } ${radiusClasses[roundedVariant]}  ${injectedClasses}`}
       disabled={disabled || loading}
@@ -73,4 +79,3 @@ export default function UiButton({
     </button>
   );
 }
-

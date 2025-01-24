@@ -39,7 +39,7 @@ export default function RootLayout({
           {/* Scrollable Children */}
           <div
             className={cn(
-              'flex-1 pb-16 max-w-[1177px]',
+              'flex-1 pb-16 max-w-[1440px]',
               isSmallScreen ? 'px-4 mt-20' : 'px-6 pl-[70px] pt-28'
             )}
           >
