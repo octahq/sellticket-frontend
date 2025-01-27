@@ -6,12 +6,15 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { sidebarItems } from '@/components/common/constants';
 import SearchInput from './SearchInput';
+import { useState } from 'react';
 
 const Sidebar = () => {
   const pathname = usePathname();
 
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
-    <aside className="relative z-30 bg-white h-full border-r-[1px] border-[#EDEDED]">
+    <aside className="relative z-40 bg-white h-full border-r-[1px] border-[#EDEDED]">
       <div className="pt-7 ml-6 border-[#E0E0E0]">
         <Image
           className="w-[129px] h-[33px]"
@@ -22,7 +25,12 @@ const Sidebar = () => {
       </div>
       <div>
         <nav className="px-6 pt-7">
-          <SearchInput />
+          <div className="h-[40px]">
+            <SearchInput
+              value={searchTerm} // Bind value to state
+              setValue={setSearchTerm} // Pass the setter function
+            />
+          </div>
           <ul className="space-y-2 pt-6">
             {sidebarItems.map((item) => (
               <li key={item.id}>
