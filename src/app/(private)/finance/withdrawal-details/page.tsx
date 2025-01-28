@@ -31,7 +31,12 @@ export type optionType = {
 
 const WithdrawalDetails = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
-  let withdrawalMethod;
+  const [withdrawalMethod] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('withdrawalMethod') || '';
+    }
+    return '';
+  });
 
   const formData = useObjectState({
     bankName: '',
@@ -54,9 +59,6 @@ const WithdrawalDetails = () => {
     setIsActive(true);
   };
 
-  if (typeof window !== 'undefined') {
-    withdrawalMethod = sessionStorage?.getItem('withdrawalMethod') || '';
-  }
   const mappedBanks = banks.map((bank) => ({
     ...bank,
     logo:
