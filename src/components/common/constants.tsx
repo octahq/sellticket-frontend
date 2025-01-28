@@ -7,8 +7,11 @@ import {
   MarketingIcon,
   SettingsIcon,
 } from '@/assets/icons/images';
+import { StaticImageData } from 'next/image';
+import bankImg from '@/assets/images/bankImg.png';
 
 import { SidebarItem } from '@/types/types';
+import PageInfo from '@/types/PageInfo';
 
 export const sidebarItems: SidebarItem[] = [
   {
@@ -69,3 +72,111 @@ export const sidebarItems: SidebarItem[] = [
     hover: <SettingsIcon fill="#D4FF5F" />,
   },
 ];
+
+export const financeWalletTab: { id: string; value: string }[] = [
+  { id: '1', value: 'Cash Balance' },
+  { id: '2', value: 'Crypto Balance' },
+];
+
+export const transHeaders = [
+  '',
+  'name',
+  'type',
+  'date',
+  'time',
+  'price',
+  'status',
+  '',
+];
+
+export const fetchedTransactions: {
+  id: string;
+  logo: StaticImageData;
+  name: string;
+  type: string;
+  date: string;
+  time: string;
+  price: string;
+  status: string;
+}[] = [
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+  {
+    id: '#1234578900',
+    logo: bankImg,
+    name: 'Octa tickera fx',
+    type: 'debit',
+    date: 'Sep 01, 2022',
+    time: '12:30pm',
+    price: '100,000',
+    status: 'Successful',
+  },
+];
+
+export const withdrawalMethods: { title: string; text: string }[] = [
+  {
+    title: 'Bank Transfer',
+    text: 'Transfer the money using your bank account.',
+  },
+  {
+    title: 'Digital Wallet',
+    text: 'Receive payment through USDC,ETH,USDT.',
+  },
+];
+
+export const PageInfos: Record<string, PageInfo> = {
+  '/dashboard': { title: '', description: '' },
+  '/events': { title: 'Events', description: 'Manage and publish your events' },
+  '/finance': {
+    title: 'Account',
+    description: 'Your account details and balance',
+  },
+};

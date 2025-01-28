@@ -94,6 +94,7 @@ export default {
       },
       gridTemplateColumns: {
         'responsive-grid': 'repeat(auto-fit, minmax(242px, 1fr))',
+        'modal-shadow': '0px 3.53px 15.87px -3.53px #6A803040',
       },
     },
   },

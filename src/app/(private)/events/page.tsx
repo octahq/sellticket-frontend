@@ -33,9 +33,8 @@ const Page = () => {
   ];
 
   return (
-    <section className=" lg:w-[90%]">
-      <h2 className="text-xl font-semibold mb-4 text-secondary-800">Events</h2>
-      <div className="flex gap-2 justify-between items-center sm:pb-4 mb-4  sm:border-b sm:border-stroke-100">
+    <section className="relative lg:w-[90%] pt-8 sm:pt-0">
+      <div className="fixed top-[98.9px] sm:relative sm:top-0 bg-white z-10  flex w-full gap-2 justify-between items-center sm:pb-4 mb-4  sm:border-b sm:border-stroke-100">
         <div className="flex-1 overflow-x-auto hide-scroll-bar rounded-[20px]">
           <UiTabs
             activeTab={activeEventTab}
@@ -44,7 +43,7 @@ const Page = () => {
           />
         </div>
         <div className="flex items-center gap-3">
-          <button className="fill-secondary-800 h-8 px-[10px] rounded-[10px] bg-neutral-500">
+          <button className="hidden sm:block fill-secondary-800 h-8 px-[10px] rounded-[10px] bg-neutral-500">
             <UiIcon size="24" icon="Filter" />
           </button>
           <div className="hidden sm:block">
@@ -62,7 +61,7 @@ const Page = () => {
           <EventCard key={index} event={event} />
         ))}
       </div>
-      <button className="absolute sm:hidden bottom-[10%] right-6 w-[50px] h-[50px] rounded-full flex justify-center items-center bg-secondary-gradient stroke-white">
+      <button className="fixed sm:hidden bottom-[10%] right-6 w-[50px] h-[50px] rounded-full flex justify-center items-center bg-secondary-gradient stroke-white">
         <UiIcon icon="Add" size="24" />
       </button>
     </section>
