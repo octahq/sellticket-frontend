@@ -16,13 +16,13 @@
  * -suffixNode: this is used to append a node to the input e.g icons
  */
 
-'use client'
+'use client';
 
 import { useMemo, useState } from 'react';
 
 import UiField from '../Field/UiField';
 
-export type InputType = 'text';
+export type InputType = 'text' | 'number';
 
 const variantClasses = {
   default: 'bg-transparent text-gray-1000 placeholder:text-typography-disabled',
@@ -57,6 +57,7 @@ interface Props {
   onChange: (event: { name: string; value: string | null }) => void;
   prefixNode?: React.ReactNode;
   suffixNode?: React.ReactNode;
+  grayBgInput?: boolean;
 }
 
 export default function UiInput({
@@ -73,9 +74,8 @@ export default function UiInput({
   onChange,
   prefixNode,
   suffixNode,
+  grayBgInput,
 }: Props) {
-  const [inputType] = useState(type);
-
   function sendValue(e: React.ChangeEvent<HTMLInputElement>) {
     onChange({ name: e.target.name, value: e.target.value });
   }
@@ -84,33 +84,39 @@ export default function UiInput({
     return error ? 'bg-input-gradient-error' : `bg-input-gradient`;
   }, [error]);
 
-  const validatedPlaceholder = useMemo(()=> {
-    return error ? 'placeholder:text-danger-500' : 'placeholder:text-stroke-500'
-  }, [error])
+  const validatedPlaceholder = useMemo(() => {
+    return error
+      ? 'placeholder:text-danger-500'
+      : 'placeholder:text-stroke-500';
+  }, [error]);
 
   return (
     <UiField label={label} error={error}>
-      <div className={`h-11 w-full box-border p-[1.5px] rounded-[10px] ${validatedBorder}`}>
+      <div
+        className={`h-11 w-full box-border ${
+          !grayBgInput && 'p-[1.5px]'
+        } rounded-[10px] ${grayBgInput ? validatedBorder : validatedBorder}`}
+      >
         <div
-          className='relative w-full h-full  bg-neutral-100 flex gap-[5px] px-4 rounded-[9px]'
+          className={`relative w-full h-full ${
+            grayBgInput ? 'bg-[#F5F5F5]' : 'bg-neutral-100'
+          }  flex gap-[5px] px-4 rounded-[9px]`}
         >
           {prefixNode && (
-            <div className="text-sm flex items-center">
-              {prefixNode}
-            </div>
+            <div className="text-sm flex items-center">{prefixNode}</div>
           )}
 
           <input
             className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
             placeholder={placeholder}
-            type={inputType}
+            type={type}
             value={value || ''}
             name={name}
             id={name}
             disabled={disabled}
             onChange={sendValue}
           />
-          
+
           {suffixNode && (
             <div className="pl-2 pr-4 text-gray-500 text-sm flex items-center">
               {suffixNode}

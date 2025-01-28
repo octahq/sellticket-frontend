@@ -170,3 +170,17 @@ export const withdrawalMethods: { title: string; text: string }[] = [
     text: 'Receive payment through USDC,ETH,USDT.',
   },
 ];
+
+export const banks: {
+  id: number;
+  name: string;
+  logo: StaticImageData | string;
+}[] = [
+  { id: 1, name: 'Bank of America', logo: bankImg },
+  {
+    id: 2,
+    name: 'Chase Bank',
+    logo: bankImg,
+  },
+  { id: 3, name: 'Wells Fargo', logo: bankImg },
+];
