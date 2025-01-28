@@ -85,8 +85,8 @@ const SecondLayer = () => {
                     row.status === 'Successful'
                       ? 'text-green-600 cursor-pointer relative'
                       : row.status === 'Failed'
-                      ? 'text-red-600 cursor-pointer relative'
-                      : 'text-yellow-600 cursor-pointer relative'
+                        ? 'text-red-600 cursor-pointer relative'
+                        : 'text-yellow-600 cursor-pointer relative'
                   }
                 >
                   <span>{row.status}</span>

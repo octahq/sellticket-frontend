@@ -1,15 +1,15 @@
 /**
- * This is a hook that makes handling object state easier  
+ * This is a hook that makes handling object state easier
  * This hook handles setting and mutating object state
- * Props: 
- * -data: this is the default data or initial data 
+ * Props:
+ * -data: this is the default data or initial data
  * Functions:
  * -set: this function sets a value in the object
  * -setDeep: this function handles the mutation of deep rooted data
  * -reset: this function resets the date to it's initial value
  */
 
-'use client'
+'use client';
 
 import { useState } from 'react';
 
@@ -18,7 +18,7 @@ import OnChangeParams from '@/types/OnChangeParams';
 // --
 
 export default function useObjectState<T = Record<string, string>>(
-  data = {} as T,
+  data = {} as T
 ) {
   const [value, setValue] = useState(data);
 

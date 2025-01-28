@@ -23,7 +23,7 @@ const FirstLayer = () => {
       <Tabs defaultValue={financeWalletTab[0]?.id} onValueChange={setActiveTab}>
         {/* Tab Navigation */}
 
-        <TabsList className="flex justify-start gap-2 pt-6  ">
+        <TabsList className="flex justify-start gap-2">
           {financeWalletTab.map((tab) => (
             <TabsTrigger
               key={tab.id}

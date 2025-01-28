@@ -8,7 +8,7 @@
  * onSubmit: Triggering this function submits the form data
  */
 
-'use client'
+'use client';
 
 import { Formik, FormikErrors } from 'formik';
 import React from 'react';
@@ -39,15 +39,15 @@ export default function UiForm({
       errors = error.inner.reduce(
         (
           acc: Record<string, string>,
-          { path, message }: { path: string; message: string },
+          { path, message }: { path: string; message: string }
         ) => {
           acc[path] = message;
           return acc;
         },
-        {},
+        {}
       );
-    }    
-    
+    }
+
     return errors;
   }
 

@@ -1,8 +1,12 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+
+import { PageInfos } from '@/components/common/constants';
 import Sidebar from '@/components/Layout/ProtectedLayout/Sidebar';
 import Header from '@/components/Layout/ProtectedLayout/Header';
+
 import '../../styles/authenticatedLayoutStyles.css';
 
 export default function RootLayout({
@@ -10,6 +14,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
+  const currentPageInfo = PageInfos[pathname] || { title: 'Dashboard' };
+
   return (
     <div className="h-screen overflow-hidden">
       {/* Main Grid */}
@@ -36,11 +44,13 @@ export default function RootLayout({
               'px-6 pt-28 hide-sidebar:px-5 hide-sidebar:mt-24'
             )}
           >
-            <div className="hidden md:block">
-              <h3 className="font-bold text-xl">Account</h3>
-              <p className="text-sm pt-[2px]">
-                Your account details and balance
-              </p>
+            <div className="hidden md:block mb-5 page-title">
+              <h3 className="font-bold text-xl">{currentPageInfo.title}</h3>
+              {currentPageInfo.description && (
+                <p className="text-sm pt-[2px]">
+                  {currentPageInfo.description}
+                </p>
+              )}
             </div>
             {children}
           </div>

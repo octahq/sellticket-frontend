@@ -11,6 +11,7 @@ import { StaticImageData } from 'next/image';
 import bankImg from '@/assets/images/bankImg.png';
 
 import { SidebarItem } from '@/types/types';
+import PageInfo from '@/types/PageInfo';
 
 export const sidebarItems: SidebarItem[] = [
   {
@@ -170,6 +171,15 @@ export const withdrawalMethods: { title: string; text: string }[] = [
     text: 'Receive payment through USDC,ETH,USDT.',
   },
 ];
+
+export const PageInfos: Record<string, PageInfo> = {
+  '/dashboard': { title: '', description: '' },
+  '/events': { title: 'Events', description: 'Manage and publish your events' },
+  '/finance': {
+    title: 'Account',
+    description: 'Your account details and balance',
+  },
+};
 
 export const banks: {
   id: number;
