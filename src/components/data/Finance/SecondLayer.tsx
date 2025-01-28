@@ -122,7 +122,7 @@ const SecondLayer = () => {
       <div className="pt-5 md:hidden">
         <p className="text-sm text-[#5B5B5B] font-semibold pb-3"> Today</p>
         <div>
-          <section>
+          <section className=" max-h-96 overflow-y-scroll">
             <ul className="grid  gap-4">
               {fetchedTransactions?.length ? (
                 fetchedTransactions.map((row, rowIndex) => (

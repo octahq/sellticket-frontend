@@ -21,7 +21,7 @@ const Header = () => {
     <header className="fixed w-full top-0 right-0 left-0 z-30 bg-white">
       <div className={`flex  `}>
         {!isSmallScreen ? (
-          <div className="flex  ml-auto items-center secondary-font  space-x-3 py-4 pr-8">
+          <div className="flex   ml-auto items-center secondary-font  space-x-3 py-4 pr-8">
             {/* Notification Bell with Badge */}
 
             {/* Avatar */}
