@@ -22,3 +22,9 @@
     display: block;
   }
 }
+
+@media (min-width: 999px) {
+  .show-header {
+    display: none;
+  }
+}

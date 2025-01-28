@@ -1,9 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useId, useRef, useState, useEffect } from 'react';
+import React, { useId, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useOutsideClick } from '@/hooks/use-outside-click';
 import featuredIcon from '../../assets/images/featuredIcon.png';
 import { IoCloseOutline } from 'react-icons/io5';
 import { withdrawalMethods } from '../common/constants';
@@ -12,17 +11,31 @@ import walletTransferIcon from '../../assets/images/wallettransfer.png';
 import { LiaCircleSolid } from 'react-icons/lia';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import { Button } from '../ui/button';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   active: boolean;
+  withdrawalMethod: string;
+  setWithdrawalMethod: (active: string) => void;
   setActive: (active: boolean) => void;
+  setIsShow: (active: boolean) => void;
+  setOpen: (active: boolean) => void;
 }
 
-export function WithdrawalMethod({ active, setActive }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+export function WithdrawalMethod({
+  active,
+  setActive,
+  setIsShow,
+  setOpen,
+  withdrawalMethod,
+  setWithdrawalMethod,
+}: Props) {
   const id = useId();
-  const [withdrawalMethod, setWithdrawalMethod] = useState<string>('');
 
+  const isSmallScreen = useMediaQuery('(max-width: 768px)');
+
+  const router = useRouter();
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
@@ -40,7 +53,34 @@ export function WithdrawalMethod({ active, setActive }: Props) {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [active, setActive]);
 
-  useOutsideClick(ref, () => setActive(false));
+  function handleWithdrawalAction(): void {
+    // Ensure modal actions are executed based on the selected method
+    if (withdrawalMethod.includes('Bank')) {
+      if (isSmallScreen) {
+        // Redirect to withdrawal details page for small screens
+        router.push('/finance/withdrawal-details');
+      } else {
+        // Open bank withdrawal modal for larger screens
+        setIsShow(true);
+      }
+    } else {
+      if (isSmallScreen) {
+        // Redirect to withdrawal details page for small screens
+        router.push('/finance/withdrawal-details');
+      } else {
+        // Open wallet withdrawal modal for larger screens
+        setOpen(true);
+      }
+    }
+
+    // Deactivate the current action state
+    setActive(false);
+    sessionStorage.setItem('withdrawalMethod', withdrawalMethod);
+  }
+
+  useEffect(() => {
+    setWithdrawalMethod(withdrawalMethods[0]?.title);
+  }, []);
 
   return (
     <>
@@ -59,15 +99,34 @@ export function WithdrawalMethod({ active, setActive }: Props) {
         {active && (
           <div className="fixed inset-0 grid place-items-center z-50">
             <motion.div
-              layoutId={`card-${id}`}
-              ref={ref}
-              className="w-[90%] md:w-full mx-4 max-w-[432px] h-fit max-h-[90%] flex flex-col bg-white rounded-[12px] overflow-hidden px-5 py-4"
-              initial={{ opacity: 0, scale: 0.9, x: '-30%' }} // Slightly offset from the center
-              animate={{ opacity: 1, scale: 1, x: 0 }} // Move to the exact center
-              exit={{ opacity: 0, scale: 0.9, x: '-30%' }} // Slide slightly back to the left
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              className="fixed bg-white shadow-lg 
+    bottom-0 left-0 right-0 max-h-[90%] overflow-y-auto 
+    rounded-t-[30px] md:rounded-[12px]  px-5 py-6
+    md:relative lg:w-[90%] lg:md:w-full lg:mx-4 lg:max-w-[432px] md:h-fit lg:max-h-[90%] md:flex md:flex-col md:overflow-hidden md:px-5 md:py-4"
+              initial={{
+                opacity: 0,
+                ...(window.innerWidth <= 768
+                  ? { y: '100%' } // Slide in from bottom for mobile
+                  : { scale: 0.9, x: '-30%' }), // Original animation for large screens
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                x: 0,
+              }}
+              exit={{
+                opacity: 0,
+                ...(window.innerWidth <= 768
+                  ? { y: '100%' } // Slide out to bottom for mobile
+                  : { scale: 0.9, x: '-30%' }), // Original animation for large screens
+              }}
+              transition={{
+                duration: 0.5,
+                ease: 'easeInOut',
+              }}
             >
-              <motion.div layoutId={`image-${id}`}>
+              <motion.div>
                 <div className="flex justify-between items-center">
                   <Image src={featuredIcon} alt="featured icon" />
                   <motion.button
@@ -98,7 +157,7 @@ export function WithdrawalMethod({ active, setActive }: Props) {
                         withdrawalMethod === item.title && 'bg-[#FAFAFA]'
                       }`}
                       style={{
-                        gridTemplateColumns: '60px 1fr 20px',
+                        gridTemplateColumns: '50px 1fr 20px',
                         borderColor:
                           withdrawalMethod === item.title
                             ? i === 0
@@ -106,7 +165,9 @@ export function WithdrawalMethod({ active, setActive }: Props) {
                               : '#2775CA'
                             : '#E8EAEA',
                       }}
-                      onClick={() => setWithdrawalMethod(item.title)}
+                      onClick={() => {
+                        setWithdrawalMethod(item.title);
+                      }}
                     >
                       {i == 0 ? (
                         <Image src={bankTransferIcon} alt="withdrawal icons" />
@@ -120,8 +181,12 @@ export function WithdrawalMethod({ active, setActive }: Props) {
                       )}
 
                       <div>
-                        <h3>{item.title}</h3>
-                        <p className="text-sm text-[#6B6A6A]">{item.text}</p>
+                        <h3 className="text-sm md:text-base font-medium">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs md:text-sm text-[#6B6A6A] font-normal">
+                          {item.text}
+                        </p>
                       </div>
                       <div className="text-2xl cursor-pointer">
                         {withdrawalMethod === item.title ? (
@@ -138,14 +203,19 @@ export function WithdrawalMethod({ active, setActive }: Props) {
                       </div>
                     </li>
                   ))}
-                  <div className="flex gap-2 mt-5 mb-2">
+                  <div className="flex justify-end md:justify-start gap-2 mt-5 mb-2">
                     <Button
-                      className="w-[40%] bg-[#EFEFEF]"
+                      className="w-[40%] bg-[#EFEFEF] hidden md:block"
                       onClick={() => setActive(false)}
                     >
                       Back
                     </Button>
-                    <Button className="primary-btn w-[60%]">Confirm</Button>
+                    <Button
+                      className="primary-btn w-[40%] md:w-[60%]"
+                      onClick={() => handleWithdrawalAction()}
+                    >
+                      Confirm
+                    </Button>
                   </div>
                 </ul>
               </motion.div>
