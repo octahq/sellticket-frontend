@@ -15,6 +15,7 @@ interface Props {
   setActive: (active: boolean) => void;
   setOpen?: (active: boolean) => void; // Optional
   setIsOpen?: (active: boolean) => void; // Optional
+  setIsShowSuccess: (active: boolean) => void; // Optional
 }
 
 export function ConfirmWithdrawal({
@@ -23,6 +24,7 @@ export function ConfirmWithdrawal({
   setOpen,
   setIsOpen,
   withdrawalMethod,
+  setIsShowSuccess,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -219,7 +221,10 @@ export function ConfirmWithdrawal({
 
                 <Button
                   className="w-full h-full primary-btn"
-                  onClick={() => setActive(false)}
+                  onClick={() => {
+                    setActive(false);
+                    setIsShowSuccess(true);
+                  }}
                 >
                   Confirm
                 </Button>
