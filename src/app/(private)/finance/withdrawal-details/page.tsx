@@ -54,7 +54,7 @@ const WithdrawalDetails = () => {
     setIsActive(true);
   };
 
-  if (sessionStorage) {
+  if (typeof window !== 'undefined') {
     withdrawalMethod = sessionStorage?.getItem('withdrawalMethod') || '';
   }
   const mappedBanks = banks.map((bank) => ({
