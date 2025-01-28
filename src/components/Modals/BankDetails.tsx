@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useId, useRef, useState, useEffect } from 'react';
+import React, { useId, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import featuredIcon from '../../assets/images/featuredIcon.png';
 import { IoCloseOutline } from 'react-icons/io5';
