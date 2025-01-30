@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { HiMiniBars3 } from 'react-icons/hi2';
@@ -9,6 +10,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { Badge } from '@/components/ui/badge';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { PageInfos } from '@/components/common/constants';
+import SideDrawer from './SideDrawer';
 
 const Header = () => {
   const isSmallScreen = useMediaQuery('(max-width: 999px)');
@@ -16,6 +18,10 @@ const Header = () => {
   const pathname = usePathname();
 
   const currentPageInfo = PageInfos[pathname] || { title: 'Dashboard' };
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleDrawer = () => setIsOpen((prev) => !prev);
 
   return (
     <header className="fixed w-full top-0 right-0 left-0 z-30 bg-white">
@@ -59,12 +65,16 @@ const Header = () => {
                 </p>
               )}
             </div>
-            <div className=" w-[34px] h-[34px]  grid place-items-center rounded-full text-3xl">
+            <button
+              className=" w-[34px] h-[34px]  grid place-items-center rounded-full text-3xl"
+              onClick={toggleDrawer}
+            >
               <HiMiniBars3 />
-            </div>
+            </button>
           </div>
         )}
       </div>
+      <SideDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   );
 };
