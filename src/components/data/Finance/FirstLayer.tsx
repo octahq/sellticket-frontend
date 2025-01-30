@@ -9,6 +9,7 @@ import { WithdrawalMethod } from '@/components/Modals/WithdrawalMethod';
 import { BankDetails } from '@/components/Modals/BankDetails';
 import { DigitalWalletWithdrawal } from '@/components/Modals/DigitalWalletWithdrawal';
 import { ConfirmWithdrawal } from '@/components/Modals/ConfirmWithdrawal';
+import { WithdrawalSuccess } from '@/components/Modals/WithdrawalSucess';
 
 const FirstLayer = () => {
   const [activeTab, setActiveTab] = useState(financeWalletTab[0]?.id);
@@ -17,6 +18,7 @@ const FirstLayer = () => {
   const [open, setOpen] = useState<boolean>(false); //opens the digital wallet withdrawal modal
   const [isActive, setIsActive] = useState<boolean>(false);
   const [withdrawalMethod, setWithdrawalMethod] = useState<string>(''); //stores the withdrawal method user selected
+  const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false); // opens the success modal for withdrawal
 
   return (
     <div>
@@ -101,7 +103,9 @@ const FirstLayer = () => {
         setOpen={setOpen}
         setIsOpen={setIsShow}
         withdrawalMethod={withdrawalMethod}
+        setIsShowSuccess={setIsShowSuccess}
       />
+      <WithdrawalSuccess active={isShowSuccess} setActive={setIsShowSuccess} />
     </div>
   );
 };
