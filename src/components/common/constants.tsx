@@ -33,8 +33,8 @@ export const sidebarItems: SidebarItem[] = [
 
   {
     id: 3,
-    name: 'Customers',
-    path: '/customers',
+    name: 'Attendees',
+    path: '/attendees',
     icon: <CustomersIcon fill="#6B6B6B" />,
     sec: <CustomersIcon fill="#D4FF5F" />,
     hover: <CustomersIcon fill="#D4FF5F" />,
