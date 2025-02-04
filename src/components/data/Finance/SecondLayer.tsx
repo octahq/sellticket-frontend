@@ -85,8 +85,8 @@ const SecondLayer = () => {
                     row.status === 'Successful'
                       ? 'text-green-600 cursor-pointer relative'
                       : row.status === 'Failed'
-                      ? 'text-red-600 cursor-pointer relative'
-                      : 'text-yellow-600 cursor-pointer relative'
+                        ? 'text-red-600 cursor-pointer relative'
+                        : 'text-yellow-600 cursor-pointer relative'
                   }
                 >
                   <span>{row.status}</span>
@@ -122,7 +122,7 @@ const SecondLayer = () => {
       <div className="pt-5 md:hidden">
         <p className="text-sm text-[#5B5B5B] font-semibold pb-3"> Today</p>
         <div>
-          <section>
+          <section className=" max-h-96 overflow-y-scroll">
             <ul className="grid  gap-4">
               {fetchedTransactions?.length ? (
                 fetchedTransactions.map((row, rowIndex) => (

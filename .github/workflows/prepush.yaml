@@ -3,11 +3,11 @@ name: Check PR and Commit Message
 on:
   pull_request:
     branches:
-      - develop  # Trigger the workflow when a PR is raised against the develop branch
+      - develop # Trigger the workflow when a PR is raised against the develop branch
     types:
       - opened
       - edited
-      - synchronize  # Runs the check when the PR is updated with new commits
+      - synchronize # Runs the check when the PR is updated with new commits
 
 jobs:
   check-commit-message:
@@ -28,7 +28,7 @@ jobs:
           else
             npx commitlint --to=HEAD --verbose
           fi
-        continue-on-error: false  # Fail if commit message doesn't follow the format
+        continue-on-error: false # Fail if commit message doesn't follow the format
 
   check-pr-branch:
     runs-on: ubuntu-latest

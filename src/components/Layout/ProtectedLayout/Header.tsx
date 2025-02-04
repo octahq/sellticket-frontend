@@ -1,18 +1,33 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
+
+import { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { IoNotificationsOutline } from 'react-icons/io5';
 import { HiMiniBars3 } from 'react-icons/hi2';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { Badge } from '@/components/ui/badge';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { PageInfos } from '@/components/common/constants';
+import SideDrawer from './SideDrawer';
 
 const Header = () => {
   const isSmallScreen = useMediaQuery('(max-width: 999px)');
 
+  const pathname = usePathname();
+
+  const currentPageInfo = PageInfos[pathname] || { title: 'Dashboard' };
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleDrawer = () => setIsOpen((prev) => !prev);
+
   return (
-    <header className="fixed w-full  top-0 right-0 left-0 z-30 bg-white">
+    <header className="fixed w-full top-0 right-0 left-0 z-30 bg-white">
       <div className={`flex  `}>
         {!isSmallScreen ? (
-          <div className="flex  ml-auto items-center secondary-font  space-x-3 py-4 pr-8">
+          <div className="flex   ml-auto items-center secondary-font  space-x-3 py-4 pr-8">
             {/* Notification Bell with Badge */}
 
             {/* Avatar */}
@@ -41,19 +56,25 @@ const Header = () => {
             </div>
           </div>
         ) : (
-          <div className="flex justify-between h-[67px] mt-8 pb-8 px-4  items-center w-full text-[#292D32]">
+          <div className="flex justify-between h-[67px] mt-8 pb-8 px-6  items-center w-full text-[#292D32]">
             <div>
-              <h3 className="font-bold text-xl">Account</h3>
-              <p className="text-sm pt-[2px]">
-                Your account details and balance
-              </p>
+              <h3 className="font-bold text-xl">{currentPageInfo.title}</h3>
+              {currentPageInfo.description && (
+                <p className="text-sm pt-[2px]">
+                  {currentPageInfo.description}
+                </p>
+              )}
             </div>
-            <div className=" w-[34px] h-[34px]  grid place-items-center rounded-full text-3xl">
+            <button
+              className=" w-[34px] h-[34px]  grid place-items-center rounded-full text-3xl"
+              onClick={toggleDrawer}
+            >
               <HiMiniBars3 />
-            </div>
+            </button>
           </div>
         )}
       </div>
+      <SideDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   );
 };

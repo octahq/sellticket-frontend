@@ -6,17 +6,26 @@ import { financeWalletTab } from '../../common/constants';
 import bgImg from '../../../assets/images/vector.png';
 import { Button } from '../../ui/button';
 import { WithdrawalMethod } from '@/components/Modals/WithdrawalMethod';
+import { BankDetails } from '@/components/Modals/BankDetails';
+import { DigitalWalletWithdrawal } from '@/components/Modals/DigitalWalletWithdrawal';
+import { ConfirmWithdrawal } from '@/components/Modals/ConfirmWithdrawal';
+import { WithdrawalSuccess } from '@/components/Modals/WithdrawalSucess';
 
 const FirstLayer = () => {
   const [activeTab, setActiveTab] = useState(financeWalletTab[0]?.id);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isShow, setIsShow] = useState<boolean>(false); //opens the bank withdrawal modal
+  const [open, setOpen] = useState<boolean>(false); //opens the digital wallet withdrawal modal
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [withdrawalMethod, setWithdrawalMethod] = useState<string>(''); //stores the withdrawal method user selected
+  const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false); // opens the success modal for withdrawal
 
   return (
     <div>
       <Tabs defaultValue={financeWalletTab[0]?.id} onValueChange={setActiveTab}>
         {/* Tab Navigation */}
 
-        <TabsList className="flex justify-start gap-2 pt-6  ">
+        <TabsList className="flex justify-start gap-2">
           {financeWalletTab.map((tab) => (
             <TabsTrigger
               key={tab.id}
@@ -68,7 +77,35 @@ const FirstLayer = () => {
           </TabsContent>
         ))}
       </Tabs>
-      <WithdrawalMethod active={isOpen} setActive={setIsOpen} />
+      <WithdrawalMethod
+        active={isOpen}
+        setActive={setIsOpen}
+        setIsShow={setIsShow}
+        setOpen={setOpen}
+        withdrawalMethod={withdrawalMethod}
+        setWithdrawalMethod={setWithdrawalMethod}
+      />
+      <BankDetails
+        active={isShow}
+        setActive={setIsShow}
+        setOpen={setIsOpen}
+        setOpenConfirm={setIsActive}
+      />
+      <DigitalWalletWithdrawal
+        active={open}
+        setActive={setOpen}
+        setOpen={setIsOpen}
+        setOpenConfirm={setIsActive}
+      />
+      <ConfirmWithdrawal
+        active={isActive}
+        setActive={setIsActive}
+        setOpen={setOpen}
+        setIsOpen={setIsShow}
+        withdrawalMethod={withdrawalMethod}
+        setIsShowSuccess={setIsShowSuccess}
+      />
+      <WithdrawalSuccess active={isShowSuccess} setActive={setIsShowSuccess} />
     </div>
   );
 };

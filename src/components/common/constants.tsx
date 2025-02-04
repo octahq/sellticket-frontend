@@ -11,12 +11,13 @@ import { StaticImageData } from 'next/image';
 import bankImg from '@/assets/images/bankImg.png';
 
 import { SidebarItem } from '@/types/types';
+import PageInfo from '@/types/PageInfo';
 
 export const sidebarItems: SidebarItem[] = [
   {
     id: 1,
     name: 'Dashboard',
-    path: '/dashboard',
+    path: '/management/dashboard',
     icon: <HomeIcon fill="#6B6B6B" />,
     sec: <HomeIcon fill="#D4FF5F" />,
     hover: <HomeIcon fill="#D4FF5F" />,
@@ -24,7 +25,7 @@ export const sidebarItems: SidebarItem[] = [
   {
     id: 2,
     name: 'Event',
-    path: '/events',
+    path: '/management/events',
     icon: <EventIcon fill="#6B6B6B" />,
     sec: <EventIcon fill="#D4FF5F" />,
     hover: <EventIcon fill="#D4FF5F" />,
@@ -32,8 +33,8 @@ export const sidebarItems: SidebarItem[] = [
 
   {
     id: 3,
-    name: 'Customers',
-    path: '/customers',
+    name: 'Attendees',
+    path: '/management/attendees',
     icon: <CustomersIcon fill="#6B6B6B" />,
     sec: <CustomersIcon fill="#D4FF5F" />,
     hover: <CustomersIcon fill="#D4FF5F" />,
@@ -41,7 +42,7 @@ export const sidebarItems: SidebarItem[] = [
   {
     id: 4,
     name: 'Analytics',
-    path: '/analytics',
+    path: '/management/analytics',
     icon: <AnalyticsIcon fill="#6B6B6B" />,
     sec: <AnalyticsIcon fill="#D4FF5F" />,
     hover: <AnalyticsIcon fill="#D4FF5F" />,
@@ -49,7 +50,7 @@ export const sidebarItems: SidebarItem[] = [
   {
     id: 5,
     name: 'Finance',
-    path: '/finance',
+    path: '/management/finance',
     icon: <FinanceIcon fill="#6B6B6B" innerFill="white" />,
     sec: <FinanceIcon fill="#D4FF5F" innerFill="#121212" />,
     hover: <FinanceIcon fill="#D4FF5F" innerFill="#121212" />,
@@ -57,7 +58,7 @@ export const sidebarItems: SidebarItem[] = [
   {
     id: 6,
     name: 'Marketing',
-    path: '/marketing',
+    path: '/management/marketing',
     icon: <MarketingIcon fill="#6B6B6B" />,
     sec: <MarketingIcon fill="#D4FF5F" />,
     hover: <MarketingIcon fill="#D4FF5F" />,
@@ -65,10 +66,21 @@ export const sidebarItems: SidebarItem[] = [
   {
     id: 7,
     name: 'Settings',
-    path: '/settings',
+    path: '/management/settings',
     icon: <SettingsIcon fill="#6B6B6B" />,
     sec: <SettingsIcon fill="#D4FF5F" />,
     hover: <SettingsIcon fill="#D4FF5F" />,
+  },
+];
+
+export const navItems = [
+  {
+    label: 'Explore events',
+    path: '/events',
+  },
+  {
+    label: 'Find my tickets',
+    path: '',
   },
 ];
 
@@ -169,4 +181,27 @@ export const withdrawalMethods: { title: string; text: string }[] = [
     title: 'Digital Wallet',
     text: 'Receive payment through USDC,ETH,USDT.',
   },
+];
+
+export const PageInfos: Record<string, PageInfo> = {
+  '/dashboard': { title: '', description: '' },
+  '/events': { title: 'Events', description: 'Manage and publish your events' },
+  '/finance': {
+    title: 'Account',
+    description: 'Your account details and balance',
+  },
+};
+
+export const banks: {
+  id: number;
+  name: string;
+  logo: StaticImageData | string;
+}[] = [
+  { id: 1, name: 'Bank of America', logo: bankImg },
+  {
+    id: 2,
+    name: 'Chase Bank',
+    logo: bankImg,
+  },
+  { id: 3, name: 'Wells Fargo', logo: bankImg },
 ];
