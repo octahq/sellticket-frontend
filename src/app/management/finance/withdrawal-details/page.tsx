@@ -251,7 +251,6 @@ const WithdrawalDetails = () => {
                         MessageWithIcon(errors.accountNumber)
                       }
                       placeholder="Enter your account number"
-                      grayBgInput
                     />
                   </div>
                   <div className="flex items-center gap-2">
@@ -270,7 +269,6 @@ const WithdrawalDetails = () => {
                         value={formData.value.amount}
                         error={errors.amount && MessageWithIcon(errors.amount)}
                         placeholder="Enter Amount"
-                        grayBgInput
                       />
                     </div>
                     <div className="w-[30%] self-end">
@@ -357,7 +355,6 @@ const WithdrawalDetails = () => {
                       value={digitalWalletData.value.address}
                       error={errors.address && MessageWithIcon(errors.address)}
                       placeholder="Enter wallet address or base name"
-                      grayBgInput
                     />
                     <p className="text-xs text-[#DD920B] py-3">
                       Use a Base chain-compatible USDC address to avoid fund
@@ -382,7 +379,6 @@ const WithdrawalDetails = () => {
                         value={digitalWalletData.value.amount}
                         error={errors.amount && MessageWithIcon(errors.amount)}
                         placeholder="0.00"
-                        grayBgInput
                       />
                     </div>
                     <div className="flex-1 self-end">

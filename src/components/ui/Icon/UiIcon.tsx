@@ -12,6 +12,7 @@ import Clock from '@/assets/svgs/clock.svg';
 import Danger from '@/assets/svgs/danger.svg';
 import Edit from '@/assets/svgs/edit.svg';
 import Filter from '@/assets/svgs/filter.svg';
+import Hamburger from '@/assets/svgs/hamburger.svg';
 import Login from '@/assets/svgs/login.svg';
 import Message from '@/assets/svgs/message.svg';
 import MessageNotification from '@/assets/svgs/message-notification.svg';
@@ -36,6 +37,7 @@ const icons = {
   Danger,
   Edit,
   Filter,
+  Hamburger,
   Login,
   Message,
   MessageNotification,
