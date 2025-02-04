@@ -22,7 +22,7 @@ import { useMemo, useState } from 'react';
 
 import UiField from '../Field/UiField';
 
-export type InputType = 'text' | 'number';
+export type InputType = 'text' | 'number' | 'time';
 
 const variantClasses = {
   default: 'bg-transparent text-gray-1000 placeholder:text-typography-disabled',
