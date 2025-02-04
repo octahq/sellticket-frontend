@@ -17,6 +17,7 @@ import Image from 'next/image';
 import UiForm from '@/components/ui/Form/UiForm';
 import { motion } from 'framer-motion';
 import { ConfirmWithdrawal } from '@/components/Modals/ConfirmWithdrawal';
+import { WithdrawalSuccess } from '@/components/Modals/WithdrawalSucess';
 
 interface Bank {
   id: number;
@@ -31,6 +32,8 @@ export type optionType = {
 
 const WithdrawalDetails = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [isShowSuccess, setIsShowSuccess] = useState<boolean>(false); // opens the success modal for withdrawal
+
   const [withdrawalMethod] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       return sessionStorage.getItem('withdrawalMethod') || '';
@@ -396,7 +399,9 @@ const WithdrawalDetails = () => {
         active={isActive}
         setActive={setIsActive}
         withdrawalMethod={withdrawalMethod}
+        setIsShowSuccess={setIsShowSuccess}
       />
+      <WithdrawalSuccess active={isShowSuccess} setActive={setIsShowSuccess} />
     </motion.div>
   );
 };
