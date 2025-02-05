@@ -280,7 +280,6 @@ export function DigitalWalletWithdrawal({
                               errors.address && MessageWithIcon(errors.address)
                             }
                             placeholder="Enter wallet address or base name"
-                            grayBgInput
                           />
                         </div>
                         <div>
@@ -300,7 +299,6 @@ export function DigitalWalletWithdrawal({
                               errors.amount && MessageWithIcon(errors.amount)
                             }
                             placeholder="0.00"
-                            grayBgInput
                           />
                           <p className="text-xs text-[#DD920B] py-3">
                             Ensure the address is compatible with USDC on Base

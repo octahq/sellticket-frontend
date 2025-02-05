@@ -283,7 +283,6 @@ export function BankDetails({
                               MessageWithIcon(errors.accountNumber)
                             }
                             placeholder="Enter your account number"
-                            grayBgInput
                           />
                         </div>
                         <div>
@@ -302,7 +301,6 @@ export function BankDetails({
                               errors.amount && MessageWithIcon(errors.amount)
                             }
                             placeholder="Enter Amount"
-                            grayBgInput
                           />
                         </div>
                         <div className="flex gap-2 mt-5 mb-2">

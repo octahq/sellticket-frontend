@@ -51,6 +51,8 @@ export default function SignInForm({ onSubmitForm }: Props) {
           <UiInput
             prefixNode={showPrefixNode && <UiIcon icon="Message" size="20" />}
             name="email"
+            isGradient
+            variant='gradient-secondary'
             onChange={formData.set}
             value={formData.value.email}
             error={errors.email && MessageWithIcon(errors.email)}
