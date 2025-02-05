@@ -16,8 +16,8 @@
   .hide-sidebar:mt-24 {
     margin-top: 6rem; /* Matches mt-24 */
   }
-  
-  .page-title{
+
+  .page-title {
     display: none;
   }
 }

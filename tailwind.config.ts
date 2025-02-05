@@ -81,16 +81,23 @@ export default {
           'linear-gradient(132.46deg, #292D32 0%, #8D9091 100%)',
         'auth-icon-wrapper-border':
           'linear-gradient(132.46deg, #8D9091 0%, #292D32 100%)',
-        'input-gradient':
+        'input-gradient-primary':
+          'linear-gradient(180deg, #F1F1F1 0%, #C0C0C0 172.73%)',
+        'input-gradient-secondary':
           'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #CCCCCC 100%)',
         'input-gradient-error':
           'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #C5292A 100%)',
+        'input-gradient-transparent': 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)'
       },
       boxShadow: {
         'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040',
         'primary-tab-shadow': '0px 0px 0px 1px #0000000D',
         'event-card-shadow': '0px 0px 6px 0px #5B5B5B33',
         'drop-down-shadow': '0px 4px 15px 0px #B6B6B640',
+        'nav-bar-shadow': '0px 0px 4px 0px #0000000D',
+        'event-image-frame-shadow': '0px 25px 25px 0px #00000008',
+        'event-image-frame-hole': '0px 0px 4px 0px #00000040 inset',
+        'input-shadow': '0px 1.5px 4.3px 0px #B4B4B440',
       },
       gridTemplateColumns: {
         'responsive-grid': 'repeat(auto-fit, minmax(242px, 1fr))',
