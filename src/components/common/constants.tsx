@@ -212,3 +212,9 @@ export const eventCategories: {
     value: 'cat 1',
   },
 ];
+
+export const locationTabs = [
+  { label: 'Undisclosed', value: 'Undisclosed' },
+  { label: 'Physical', value: 'Physical' },
+  { label: 'Virtual', value: 'Virtual' },
+];

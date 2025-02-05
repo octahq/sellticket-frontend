@@ -8,16 +8,26 @@ import useObjectState from '@/hooks/useObjectState';
 import UiForm from '../ui/Form/UiForm';
 import UiInput from '../ui/Input/UiInput';
 import UiButton from '../ui/Button/UiButton';
-import Select, { StylesConfig } from 'react-select';
+import Select, {
+  StylesConfig,
+  ControlProps,
+  OptionProps,
+  MenuProps,
+  PlaceholderProps,
+} from 'react-select';
+
 import { IoIosArrowDown } from 'react-icons/io';
 import UiIcon from '../ui/Icon/UiIcon';
 import { TbWorld } from 'react-icons/tb';
 import img from '../../assets/images/uploadfile.png';
 import Image from 'next/image';
-import { eventCategories } from '../common/constants';
+import { eventCategories, locationTabs } from '../common/constants';
 import { SingleValue } from '@/types/types';
 import { DatePicker } from '../ui/DatePicker';
 import TimezoneSelect, { type ITimezone } from 'react-timezone-select';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 interface Props {
   active: boolean;
@@ -39,16 +49,19 @@ export function AddEventDrawer({ active, setActive }: Props) {
     endTime: '',
     location: '',
     description: '',
+    currency: '',
   });
-  const [selectedTab, setSelectedTab] = useState('Undisclosed');
+  const [selectedTab, setSelectedTab] = useState('');
 
-  const tabs = [
-    { label: 'Undisclosed', value: 'Undisclosed' },
-    { label: 'Physical', value: 'Physical' },
-    { label: 'Virtual', value: 'Virtual' },
-  ];
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+  const [isEnablePayment, setIsEnablePayment] = useState(false);
+
+  const handleSwitchChange = (checked: boolean) => {
+    setIsEnablePayment(checked);
+    console.log('Switch is now:', checked ? 'ON' : 'OFF');
+    // You can perform additional actions here based on the switch state
+  };
 
   const handleSubmit = () => {};
 
@@ -75,7 +88,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
   }));
 
   const customStyles: StylesConfig<SingleValue, false> = {
-    control: (provided) => ({
+    control: (provided: ControlProps<SingleValue, false>['styles']) => ({
       ...provided,
       display: 'flex',
       alignItems: 'center',
@@ -91,12 +104,14 @@ export function AddEventDrawer({ active, setActive }: Props) {
         backgroundColor: '#f4f4f4',
       },
     }),
-    placeholder: (provided) => ({
+    placeholder: (
+      provided: PlaceholderProps<SingleValue, false>['styles']
+    ) => ({
       ...provided,
       fontSize: '12px',
       color: '#b3b3b3',
     }),
-    menu: (provided) => ({
+    menu: (provided: MenuProps<SingleValue, false>['styles']) => ({
       ...provided,
       borderRadius: '10px',
       marginTop: '4px',
@@ -106,15 +121,19 @@ export function AddEventDrawer({ active, setActive }: Props) {
     indicatorSeparator: () => ({
       display: 'none', // Remove the separator line
     }),
-    option: (base, state) => ({
+    option: (
+      base: OptionProps<SingleValue, false>['styles'],
+      state: OptionProps<SingleValue, false>
+    ) => ({
       ...base,
-      backgroundColor: state.isFocused ? '#F5F5F5' : 'transparent', // Highlight focused option
-      color: '#333333', // Darker text for options
-      fontSize: '12px', // Small text for options
-      padding: '10px 8px', // Add spacing for options
-      cursor: 'pointer', // Pointer cursor for options
+      backgroundColor: state.isFocused ? '#F5F5F5' : 'transparent',
+      color: '#333333',
+      fontSize: '12px',
+      padding: '10px 8px',
+      cursor: 'pointer',
     }),
   };
+
   const MessageWithIcon = (message: string) => (
     <div className="flex gap-1">
       <UiIcon icon="Danger" size="10" />
@@ -140,15 +159,15 @@ export function AddEventDrawer({ active, setActive }: Props) {
 
       <AnimatePresence>
         {active && (
-          <div className="fixed inset-0 flex justify-end z-50 overflow-y-scroll">
+          <div className="fixed inset-0 flex justify-end z-50 ">
             <motion.div
-              className="bg-white  h-full shadow-lg w-[470px] max-w-full px-5 py-6"
+              className="bg-white flex flex-col h-screen shadow-lg w-[470px] max-w-full py-6"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.5, ease: 'easeInOut' }}
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center px-5 ">
                 <h2 className="text-lg font-semibold">Create Event</h2>
                 <button
                   className="p-1 rounded-full bg-gray-200"
@@ -157,7 +176,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                   <IoCloseOutline size={16} />
                 </button>
               </div>
-              <div className="grid gap-3 mt-5">
+              <div className="grid gap-3 mt-5  flex-1 overflow-y-auto px-5 ">
                 <div className="grid">
                   <UiForm
                     formData={formData.value}
@@ -169,7 +188,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                         <div>
                           <div
                             style={{ borderStyle: 'dashed' }}
-                            className="grid place-items-center border border-[#CFE0CC] rounded-[10px] h-[135px]   "
+                            className="grid place-items-center border border-[#CFE0CC] rounded-[10px] h-[135px]  overflow-hidden "
                           >
                             <input
                               id="image_upload"
@@ -225,10 +244,9 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             </label>
                           </div>
                         </div>
-
                         <div>
                           <label
-                            htmlFor="address"
+                            htmlFor="currency"
                             id="address"
                             className="font-medium text-xs text-[#292D32]"
                           >
@@ -272,7 +290,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                           />
                         </div>
                         <div className="grid mt-4 gap-4">
-                          <div className="flex items-center gap-4 flex-col sm:flex-row">
+                          <div className="flex items-center gap-4 ">
                             <div className="flex flex-col gap-[7px]">
                               <p className="font-medium text-xs text-[##292D32]">
                                 Start date
@@ -289,7 +307,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                 id="address"
                                 className="font-medium  text-xs text-[#292D32]"
                               >
-                                Time
+                                Start time
                               </label>
                               <UiInput
                                 name="startTime"
@@ -304,25 +322,13 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                 grayBgInput
                               />
                             </div>
-                            <div className="select-wrapper">
-                              <p className="font-medium pb-1 text-xs text-[##292D32]">
-                                Time zone
-                              </p>
-                              <TimezoneSelect
-                                value={selectedTimezone}
-                                onChange={setSelectedTimezone}
-                                styles={customStyles}
-                                components={{
-                                  DropdownIndicator: () => (
-                                    <TbWorld size="15px" color="#646668" />
-                                  ), // Custom dropdown icon
-                                }}
-                              />
-                            </div>
                           </div>
-                          <p className="text-center text-xs">to</p>
+
                           <div className="flex items-center gap-4 flex-wrap">
                             <div className="flex flex-col gap-[7px]">
+                              <p className="font-medium text-xs text-[##292D32]">
+                                End date
+                              </p>
                               <DatePicker
                                 date={endDate}
                                 setDate={setEndDate}
@@ -330,6 +336,13 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               />
                             </div>
                             <div>
+                              <label
+                                htmlFor="address"
+                                id="address"
+                                className="font-medium text-xs text-[#292D32]"
+                              >
+                                End Time
+                              </label>
                               <UiInput
                                 name="endTime"
                                 type="time"
@@ -344,17 +357,32 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               />
                             </div>
                           </div>
+                          <div className="select-wrapper">
+                            <p className="font-medium pb-1 text-xs text-[##292D32]">
+                              Time zone
+                            </p>
+                            <TimezoneSelect
+                              value={selectedTimezone}
+                              onChange={setSelectedTimezone}
+                              styles={customStyles}
+                              components={{
+                                DropdownIndicator: () => (
+                                  <TbWorld size="15px" color="#646668" />
+                                ), // Custom dropdown icon
+                              }}
+                            />
+                          </div>
                         </div>
 
-                        <div className="space-y-2">
-                          <h4 className="font-medium  text-xs text-[##292D32]">
+                        <div>
+                          <h4 className="font-medium pb-2 text-xs text-[##292D32]">
                             Location
                           </h4>
-                          <div className="flex  rounded-[10px] overflow-hidden">
-                            {tabs.map((tab) => (
+                          <div className="flex bg-[#FBFBFB] rounded-[10px] overflow-hidden">
+                            {locationTabs.map((tab) => (
                               <button
                                 key={tab.value}
-                                className={`flex-1 py-[10px]  text-center text-xs font-medium transition-colors ${
+                                className={`flex-1 py-[10px] text-center text-xs font-medium transition-colors ${
                                   selectedTab === tab.value
                                     ? 'bg-[#E6E6E6] text-[#000000]'
                                     : 'bg-gray-[#FAFAFA] text-gray-600 hover:bg-gray-100'
@@ -365,30 +393,108 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               </button>
                             ))}
                           </div>
-                          <div className="bg-[#FBFBFB] py-2">
-                            {selectedTab === 'Undisclosed' && (
-                              <p className="mt-4 text-xs text-[#A1A1A1]">
-                                Your location would be displayed as undisclosed
-                                on the event page. You can always make
-                                adjustments from your event management page.
+
+                          <div className="bg-[#FBFBFB] p-2">
+                            <AnimatePresence mode="wait">
+                              {selectedTab === 'Undisclosed' && (
+                                <motion.div
+                                  key="undisclosed"
+                                  initial={{ y: -30, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  exit={{ y: -30, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  <p className="mt-4 text-xs text-[#A1A1A1]">
+                                    Your location is undisclosed. Update it
+                                    anytime on the event management page.
+                                  </p>
+                                </motion.div>
+                              )}
+
+                              {selectedTab === 'Physical' && (
+                                <motion.div
+                                  key="physical"
+                                  initial={{ y: -30, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  exit={{ y: -30, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  <input
+                                    type="text"
+                                    placeholder="Location address"
+                                    className="w-full mt-3 border-2 border-[#F1F1F1] rounded-md p-2 text-sm focus:ring-2 focus:ring-gray-800 focus:outline-none placeholder:text-[#A1A1A1] placeholder:text-[12px]"
+                                  />
+                                </motion.div>
+                              )}
+
+                              {selectedTab === 'Virtual' && (
+                                <motion.div
+                                  key="virtual"
+                                  initial={{ y: -30, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  exit={{ y: -30, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  <input
+                                    type="text"
+                                    placeholder="Meeting link"
+                                    className="w-full mt-3 border-2 border-[#F1F1F1] rounded-md p-2 text-sm focus:ring-2 focus:ring-gray-800 focus:outline-none placeholder:text-[#A1A1A1] placeholder:text-[12px]"
+                                  />
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="font-medium pb-2 text-xs text-[##292D32]">
+                            Description
+                          </p>
+                          <Textarea
+                            className="border-[#F1F1F1] border bg-[#F5F5F5] placeholder:text-[#CBCBCB]"
+                            placeholder="Add a description to encourage guest to attend"
+                          />
+                        </div>
+                        <div>
+                          <p className="font-medium text-xs text-[##292D32]">
+                            Currency
+                          </p>
+                          <Select
+                            styles={customStyles}
+                            placeholder="Select Currency"
+                            options={categoryOptions}
+                            // value={values?.idType}
+                            components={{
+                              IndicatorSeparator: () => (
+                                <div style={{ display: 'none' }}></div>
+                              ),
+                              DropdownIndicator: () => (
+                                <IoIosArrowDown size="15px" color="#646668" />
+                              ),
+                            }}
+                            name="category"
+                            onChange={(selectedOption) => {
+                              if (selectedOption) {
+                                formData.set({
+                                  name: 'currency',
+                                  value: selectedOption.name,
+                                });
+                              }
+                            }}
+                          />
+                        </div>
+                        <div>
+                          <div className="flex gap-2">
+                            <div className="flex items-center gap-1">
+                              <p className="text-xs">
+                                Enable auto withdrawal payout method
                               </p>
-                            )}
-
-                            {selectedTab === 'Physical' && (
-                              <input
-                                type="text"
-                                placeholder="Location address"
-                                className="w-full mt-3 border-2 border-[#F1F1F1] rounded-md p-2 text-sm focus:ring-2 focus:ring-gray-800 focus:outline-none placeholder:text-[#A1A1A1] placeholder:text-[12px]"
-                              />
-                            )}
-
-                            {selectedTab === 'Virtual' && (
-                              <input
-                                type="text"
-                                placeholder="Meeting link"
-                                className="w-full mt-3 border-2 border-[#F1F1F1] rounded-md p-2 text-sm focus:ring-2 focus:ring-gray-800 focus:outline-none placeholder:text-[#A1A1A1] placeholder:text-[12px]"
-                              />
-                            )}
+                              <RiErrorWarningLine className="text-[#F1BB4C]" />
+                            </div>
+                            <Switch
+                              className="h-5 w-9 data-[state=checked]:bg-[#367D2B] data-[state=unchecked]:bg-gray-300 [&>span]:h-3 [&>span]:w-3 [&>span]:bg-white [&>span]:px-1"
+                              checked={isEnablePayment}
+                              onCheckedChange={handleSwitchChange}
+                            />
                           </div>
                         </div>
                         {/* <div className="flex gap-2 mt-5 mb-2">
