@@ -385,13 +385,9 @@ export function AddEventDrawer({ active, setActive }: Props) {
                           </div>
                         </div>
                         <div>
-                          <label
-                            htmlFor="currency"
-                            id="address"
-                            className="font-medium text-xs text-[#292D32]"
-                          >
+                          <p className="font-medium text-xs text-[#292D32] pb-2">
                             Event name
-                          </label>
+                          </p>
                           <UiInput
                             name="name"
                             onChange={formData.set}
@@ -401,7 +397,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                           />
                         </div>
                         <div>
-                          <p className="font-medium text-xs text-[##292D32]">
+                          <p className="font-medium text-xs text-[##292D32] pb-2">
                             Category
                           </p>
                           <Select
@@ -441,7 +437,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               />
                             </div>
                             <div>
-                              <p className="font-medium  text-xs text-[#292D32]">
+                              <p className="font-medium  text-xs text-[#292D32] pb-2">
                                 Start time
                               </p>
                               <UiInput
@@ -471,7 +467,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               {dateError && MessageWithIcon(dateError)}
                             </div>
                             <div>
-                              <p className="font-medium text-xs text-[#292D32]">
+                              <p className="font-medium text-xs text-[#292D32] pb-2">
                                 End Time
                               </p>
                               <UiInput
@@ -578,7 +574,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                           />
                         </div>
                         <div>
-                          <p className="font-medium text-xs text-[##292D32]">
+                          <p className="font-medium text-xs text-[##292D32] pb-2">
                             Currency
                           </p>
                           <Select
@@ -634,7 +630,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                       Link your bank account{' '}
                                     </h5>
                                     <div>
-                                      <p className="font-medium text-xs text-[#6B6A6A]">
+                                      <p className="font-medium text-xs text-[#6B6A6A] pb-2">
                                         Bank name
                                       </p>
                                       <Select<Bank>
@@ -686,7 +682,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                       />
                                     </div>
                                     <div>
-                                      <p className="font-medium text-xs pt-2 text-[#6B6A6A]">
+                                      <p className="font-medium text-xs pt-2 text-[#6B6A6A] pb-2">
                                         Account number
                                       </p>
                                       <UiInput
