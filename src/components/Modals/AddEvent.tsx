@@ -1,20 +1,14 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoCloseOutline } from 'react-icons/io5';
 import { validateEventDetails } from '@/utils/schemas/addEventSchema';
 import useObjectState from '@/hooks/useObjectState';
 import UiForm from '../ui/Form/UiForm';
 import UiInput from '../ui/Input/UiInput';
-import UiButton from '../ui/Button/UiButton';
-import Select, {
-  StylesConfig,
-  ControlProps,
-  OptionProps,
-  MenuProps,
-  PlaceholderProps,
-} from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 
 import { IoIosArrowDown } from 'react-icons/io';
 import UiIcon from '../ui/Icon/UiIcon';
@@ -28,16 +22,33 @@ import TimezoneSelect, { type ITimezone } from 'react-timezone-select';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { Input } from '../ui/input';
+import { banks } from '../common/constants';
 
 interface Props {
   active: boolean;
   setActive: (active: boolean) => void;
 }
 
+interface Bank {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+interface LocationData {
+  location: {
+    lat: number;
+    lng: number;
+  };
+  [key: string]: any; // Adjust this based on the full response structure
+}
+
 export function AddEventDrawer({ active, setActive }: Props) {
   const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
     Intl.DateTimeFormat().resolvedOptions().timeZone
   );
+  const [dateError, setDateError] = useState<string>('');
   const formData = useObjectState({
     image: null,
     imageFile: '',
@@ -50,20 +61,70 @@ export function AddEventDrawer({ active, setActive }: Props) {
     location: '',
     description: '',
     currency: '',
+    moreDescription: '',
+    bankName: '',
+    accountNumber: '',
   });
   const [selectedTab, setSelectedTab] = useState('');
 
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [isEnablePayment, setIsEnablePayment] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const [location, setLocation] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [coordinate, setCoordinate] = useState<object>({});
+
+  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_IPIFY_API_KEY}&ipAddress=${location}`;
+
+  const fetchIp = async () => {
+    try {
+      setIsLoading(true);
+      const res = await axios.get<LocationData>(url);
+
+      const { data } = res;
+
+      setCoordinate(data?.location);
+
+      setIsError(false);
+    } catch (error) {
+      console.error('Error fetching IP data:', error);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchIp();
+  }, [location]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLocation(e.target.value);
+    console.log('Location:', e.target.value);
+  };
+
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option);
+    setShowDetails(false); // Hide details when switching options
+  };
 
   const handleSwitchChange = (checked: boolean) => {
     setIsEnablePayment(checked);
-    console.log('Switch is now:', checked ? 'ON' : 'OFF');
-    // You can perform additional actions here based on the switch state
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (startDate && endDate && endDate <= startDate) {
+      setDateError('The end date must be later than the start date.');
+      return; // Stop form submission
+    }
+
+    // Clear the error message if validation passes
+    setDateError('');
+  };
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -88,11 +149,11 @@ export function AddEventDrawer({ active, setActive }: Props) {
   }));
 
   const customStyles: StylesConfig<SingleValue, false> = {
-    control: (provided: ControlProps<SingleValue, false>['styles']) => ({
+    control: (provided) => ({
       ...provided,
       display: 'flex',
       alignItems: 'center',
-      backgroundColor: '#f9f9f9',
+      backgroundColor: '#f4f4f4',
       border: '1px solid #F1F1F1',
       borderRadius: '10px',
       boxShadow: 'none',
@@ -100,18 +161,21 @@ export function AddEventDrawer({ active, setActive }: Props) {
       padding: '0 12px',
       fontSize: '12px',
       color: '#000',
+      outline: 'none',
       '&:hover': {
         backgroundColor: '#f4f4f4',
       },
+      '&:focus': {
+        borderColor: 'transparent',
+        outline: 'none',
+      },
     }),
-    placeholder: (
-      provided: PlaceholderProps<SingleValue, false>['styles']
-    ) => ({
+    placeholder: (provided) => ({
       ...provided,
       fontSize: '12px',
       color: '#b3b3b3',
     }),
-    menu: (provided: MenuProps<SingleValue, false>['styles']) => ({
+    menu: (provided) => ({
       ...provided,
       borderRadius: '10px',
       marginTop: '4px',
@@ -119,19 +183,45 @@ export function AddEventDrawer({ active, setActive }: Props) {
       zIndex: 10,
     }),
     indicatorSeparator: () => ({
-      display: 'none', // Remove the separator line
+      display: 'none',
     }),
-    option: (
-      base: OptionProps<SingleValue, false>['styles'],
-      state: OptionProps<SingleValue, false>
-    ) => ({
+    option: (base, state) => ({
       ...base,
       backgroundColor: state.isFocused ? '#F5F5F5' : 'transparent',
       color: '#333333',
       fontSize: '12px',
       padding: '10px 8px',
       cursor: 'pointer',
+      '&:active': {
+        backgroundColor: '#EAEAEA',
+      },
     }),
+  };
+
+  const mappedBanks = banks.map((bank) => ({
+    ...bank,
+    logo:
+      typeof bank.logo === 'object' && 'src' in bank.logo
+        ? bank.logo.src
+        : bank.logo,
+  }));
+
+  const CustomOption = (props: any) => {
+    const { data, innerRef, innerProps } = props;
+    return (
+      <div
+        ref={innerRef}
+        {...innerProps}
+        className="flex items-center gap-2 p-2 cursor-pointer"
+      >
+        <div className=" rounded-full overflow-hidden">
+          {' '}
+          <Image src={data.logo} alt={data.name} width={20} height={20} />
+        </div>
+
+        <span className="text-xs">{data.name}</span>
+      </div>
+    );
   };
 
   const MessageWithIcon = (message: string) => (
@@ -258,7 +348,6 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             value={formData.value.name}
                             error={errors.name && MessageWithIcon(errors.name)}
                             placeholder="Name your event"
-                            grayBgInput
                           />
                         </div>
                         <div>
@@ -283,7 +372,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               if (selectedOption) {
                                 formData.set({
                                   name: 'category',
-                                  value: selectedOption.name,
+                                  value: selectedOption?.value,
                                 });
                               }
                             }}
@@ -302,13 +391,9 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               />
                             </div>
                             <div>
-                              <label
-                                htmlFor="address"
-                                id="address"
-                                className="font-medium  text-xs text-[#292D32]"
-                              >
+                              <p className="font-medium  text-xs text-[#292D32]">
                                 Start time
-                              </label>
+                              </p>
                               <UiInput
                                 name="startTime"
                                 type="time"
@@ -319,7 +404,6 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                   MessageWithIcon(errors.startTime)
                                 }
                                 placeholder="0:00"
-                                grayBgInput
                               />
                             </div>
                           </div>
@@ -334,15 +418,12 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                 setDate={setEndDate}
                                 label={'Pick End date'}
                               />
+                              {dateError && MessageWithIcon(dateError)}
                             </div>
                             <div>
-                              <label
-                                htmlFor="address"
-                                id="address"
-                                className="font-medium text-xs text-[#292D32]"
-                              >
+                              <p className="font-medium text-xs text-[#292D32]">
                                 End Time
-                              </label>
+                              </p>
                               <UiInput
                                 name="endTime"
                                 type="time"
@@ -353,7 +434,6 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                   MessageWithIcon(errors.endTime)
                                 }
                                 placeholder="0:00"
-                                grayBgInput
                               />
                             </div>
                           </div>
@@ -421,6 +501,8 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                 >
                                   <input
                                     type="text"
+                                    value={location}
+                                    onChange={handleChange}
                                     placeholder="Location address"
                                     className="w-full mt-3 border-2 border-[#F1F1F1] rounded-md p-2 text-sm focus:ring-2 focus:ring-gray-800 focus:outline-none placeholder:text-[#A1A1A1] placeholder:text-[12px]"
                                   />
@@ -450,7 +532,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             Description
                           </p>
                           <Textarea
-                            className="border-[#F1F1F1] border bg-[#F5F5F5] placeholder:text-[#CBCBCB]"
+                            className="border-[#F1F1F1] border bg-[#F5F5F5] placeholder:text-[#CBCBCB]  placeholder:text-xs"
                             placeholder="Add a description to encourage guest to attend"
                           />
                         </div>
@@ -496,6 +578,199 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               onCheckedChange={handleSwitchChange}
                             />
                           </div>
+                          <div className="p-2">
+                            <AnimatePresence mode="wait">
+                              {isEnablePayment && (
+                                <motion.div
+                                  key="undisclosed"
+                                  initial={{ y: -30, opacity: 0 }}
+                                  animate={{ y: 0, opacity: 1 }}
+                                  exit={{ y: -30, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  <div className="bg-[#FBFBFB] pl-2 pr-5 pt-1 rounded-[10px]">
+                                    <h5 className="text-xs font-medium pb-2 text-[#292D32]">
+                                      Link your bank account{' '}
+                                    </h5>
+                                    <div>
+                                      <p className="font-medium text-xs text-[#6B6A6A]">
+                                        Bank name
+                                      </p>
+                                      <Select<Bank>
+                                        options={mappedBanks}
+                                        getOptionValue={(e) => e.id.toString()}
+                                        getOptionLabel={(e) => e.name}
+                                        styles={customStyles}
+                                        placeholder="Select a Bank"
+                                        components={{
+                                          Option: CustomOption,
+                                          // SingleValue: ({ data }) => (
+                                          //   <div
+                                          //     style={{
+                                          //       display: 'flex',
+                                          //       alignItems: 'center',
+                                          //     }}
+                                          //   >
+                                          //     <Image
+                                          //       src={data.logo} // Ensure this points to the bank logo
+                                          //       alt={data.name}
+                                          //       width={20}
+                                          //       height={20}
+                                          //     />
+                                          //     {/* <span>{data.name}</span> */}
+                                          //   </div>
+                                          // ),
+                                          IndicatorSeparator: () => (
+                                            <div
+                                              style={{ display: 'none' }}
+                                            ></div>
+                                          ),
+                                          DropdownIndicator: () => (
+                                            <div>
+                                              <IoIosArrowDown
+                                                size="15px"
+                                                color="#646668"
+                                              />
+                                            </div>
+                                          ),
+                                        }}
+                                        onChange={(selectedOption) => {
+                                          if (selectedOption) {
+                                            formData.set({
+                                              name: 'bankName',
+                                              value: selectedOption.name,
+                                            });
+                                          }
+                                        }}
+                                      />
+                                    </div>
+                                    <div>
+                                      <p className="font-medium text-xs pt-2 text-[#6B6A6A]">
+                                        Account number
+                                      </p>
+                                      <UiInput
+                                        name="accountNumber"
+                                        type="number"
+                                        onChange={formData.set}
+                                        value={formData.value.accountNumber}
+                                        error={
+                                          errors.accountNumber &&
+                                          MessageWithIcon(errors.accountNumber)
+                                        }
+                                        placeholder="Enter your account number"
+                                      />
+                                    </div>
+                                    <div className="w-full flex justify-end mt-4 pb-2">
+                                      <button className="primary-btn text-xs  rounded-[10px] w-fit  md:mt-0 !py-2">
+                                        Link account
+                                      </button>
+                                    </div>
+                                  </div>
+
+                                  <div className="relative max-w-sm rounded-lg bg-[#F5F5F5] pt-2 px-2 pb-4 mt-5">
+                                    <div className="text-sm font-medium text-green-600 flex items-center space-x-1">
+                                      <span>✨</span>
+                                      <span className="bg-gradient-to-r from-[#56AB2F] to-[#A8E063] bg-clip-text text-transparent text-[11px]">
+                                        Help centre
+                                      </span>
+                                    </div>
+                                    <h3 className="mt-2 text-sm font-medium text-[#333333]">
+                                      What is Auto withdrawal
+                                    </h3>
+                                    <p className="mt-1 text-xs text-[#8D9091]">
+                                      Auto withdrawal ensures that your ticket
+                                      sales revenue is automatically transferred
+                                      to your linked payout account without
+                                      manual intervention.
+                                    </p>
+                                    <div className="absolute bottom-[-10px] left-4 w-4 h-4 bg-[#F5F5F5] rotate-45 "></div>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </div>
+                        <div className=" pt-3">
+                          <h3 className="text-xs font-medium mb-3">
+                            Transfer event fees to guests?
+                          </h3>
+                          <div className="space-y-2 text-xs text-[#6B6A6A]">
+                            <label className="flex items-center space-x-2 cursor-pointer">
+                              <Input
+                                type="radio"
+                                name="eventFee"
+                                value="addFees"
+                                checked={selectedOption === 'addFees'}
+                                onChange={() => handleOptionChange('addFees')}
+                                className="form-radio w-4 h-4 text-green-600"
+                              />
+                              <span className="text-gray-800">
+                                Yes, add fees to guest checkout
+                              </span>
+                            </label>
+                            <label className="flex items-center space-x-2 cursor-pointer">
+                              <Input
+                                type="radio"
+                                name="eventFee"
+                                value="coverFees"
+                                checked={selectedOption === 'coverFees'}
+                                onChange={() => handleOptionChange('coverFees')}
+                                className="form-radio w-4 h-4 text-green-600"
+                              />
+                              <span className="text-gray-800">
+                                No, I will cover the fees
+                              </span>
+                            </label>
+                          </div>
+
+                          {selectedOption && (
+                            <button
+                              className="mt-4 flex items-center space-x-2 text-[#0E6301] bg-[#F0FEEE] px-3 py-1 rounded-md hover:bg-green-200"
+                              onClick={() => {
+                                setShowDetails(!showDetails);
+                              }}
+                            >
+                              <span className="font-medium text-xs">
+                                + Add further details
+                              </span>
+                            </button>
+                          )}
+
+                          {showDetails && (
+                            <div className="mt-4 p-4 ">
+                              <div className="flex justify-between items-center">
+                                <label
+                                  htmlFor="currency"
+                                  id="address"
+                                  className="font-medium text-xs text-[#292D32]"
+                                >
+                                  Further Details
+                                </label>
+                                <button
+                                  className="p-1 rounded-full bg-gray-200"
+                                  onClick={() => {
+                                    setShowDetails(false);
+                                    setSelectedOption('coverFees');
+                                  }}
+                                >
+                                  <IoCloseOutline size={16} />
+                                </button>
+                              </div>
+
+                              <div className="mt-3">
+                                <UiInput
+                                  name="moreDescription"
+                                  onChange={formData.set}
+                                  value={formData.value.moreDescription}
+                                  error={
+                                    errors.moreDescription &&
+                                    MessageWithIcon(errors.moreDescription)
+                                  }
+                                  placeholder="Something you need to tell your guest"
+                                />
+                              </div>
+                            </div>
+                          )}
                         </div>
                         {/* <div className="flex gap-2 mt-5 mb-2">
                           <Button
@@ -511,6 +786,14 @@ export function AddEventDrawer({ active, setActive }: Props) {
 
                           <UiButton block>Continue</UiButton>
                         </div> */}
+                        <div className="w-full flex justify-end mt-4 pb-2">
+                          <button
+                            type="submit"
+                            className="primary-btn text-xs  rounded-[10px] w-fit  md:mt-0 !py-[11px] !px-6"
+                          >
+                            Continue
+                          </button>
+                        </div>
                       </div>
                     )}
                   </UiForm>

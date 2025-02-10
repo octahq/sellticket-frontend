@@ -40,6 +40,7 @@ export const DatePicker: React.FC<DateProps> = ({ date, setDate, label }) => {
           selected={date}
           onSelect={setDate}
           initialFocus
+          fromDate={new Date()}
         />
       </PopoverContent>
     </Popover>

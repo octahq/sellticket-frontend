@@ -23,7 +23,7 @@ import { useMemo } from 'react';
 
 import UiField from '../Field/UiField';
 
-export type InputType = 'text' | 'number' | 'time';
+export type InputType = 'text' | 'number' | 'time' | 'radio';
 
 const variantClasses = {
   default: {
@@ -112,7 +112,7 @@ export default function UiInput({
           )}
 
           <input
-            className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
+            className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-xs  bg-transparent outline-none ${validatedPlaceholder}`}
             placeholder={placeholder}
             type={type}
             value={value || ''}
