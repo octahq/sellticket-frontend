@@ -283,8 +283,6 @@ export function AddEventDrawer({ active, setActive }: Props) {
     </div>
   );
 
-  console.log(formData);
-
   return (
     <>
       <AnimatePresence>
