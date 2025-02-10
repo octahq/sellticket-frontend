@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoCloseOutline } from 'react-icons/io5';
 import { validateEventDetails } from '@/utils/schemas/addEventSchema';
@@ -12,18 +12,18 @@ import Select, { StylesConfig } from 'react-select';
 
 import { IoIosArrowDown } from 'react-icons/io';
 import UiIcon from '../ui/Icon/UiIcon';
-import { TbWorld } from 'react-icons/tb';
 import img from '../../assets/images/uploadfile.png';
 import Image from 'next/image';
 import { eventCategories, locationTabs } from '../common/constants';
 import { SingleValue } from '@/types/types';
 import { DatePicker } from '../ui/DatePicker';
-import TimezoneSelect, { type ITimezone } from 'react-timezone-select';
+import { type ITimezone } from 'react-timezone-select';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { Input } from '../ui/input';
 import { banks } from '../common/constants';
+import TimezonePicker from '../common/TimezonePicker';
 
 interface Props {
   active: boolean;
@@ -36,13 +36,13 @@ interface Bank {
   logo: string;
 }
 
-interface LocationData {
-  location: {
-    lat: number;
-    lng: number;
-  };
-  [key: string]: any; // Adjust this based on the full response structure
-}
+// interface LocationData {
+//   location: {
+//     lat: number;
+//     lng: number;
+//   };
+//   [key: string]: any; // Adjust this based on the full response structure
+// }
 
 export function AddEventDrawer({ active, setActive }: Props) {
   const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
@@ -74,33 +74,33 @@ export function AddEventDrawer({ active, setActive }: Props) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const [location, setLocation] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [coordinate, setCoordinate] = useState<object>({});
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [isError, setIsError] = useState(false);
+  // const [coordinate, setCoordinate] = useState<object>({});
 
-  const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_IPIFY_API_KEY}&ipAddress=${location}`;
+  // const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${process.env.NEXT_PUBLIC_IPIFY_API_KEY}&ipAddress=${location}`;
 
-  const fetchIp = async () => {
-    try {
-      setIsLoading(true);
-      const res = await axios.get<LocationData>(url);
+  // const fetchIp = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await axios.get<LocationData>(url);
 
-      const { data } = res;
+  //     const { data } = res;
 
-      setCoordinate(data?.location);
+  //     setCoordinate(data?.location);
 
-      setIsError(false);
-    } catch (error) {
-      console.error('Error fetching IP data:', error);
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     setIsError(false);
+  //   } catch (error) {
+  //     console.error('Error fetching IP data:', error);
+  //     setIsError(true);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchIp();
-  }, [location]);
+  // useEffect(() => {
+  //   fetchIp();
+  // }, [location]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocation(e.target.value);
@@ -147,6 +147,58 @@ export function AddEventDrawer({ active, setActive }: Props) {
     value: id?.value,
     label: id?.name,
   }));
+  const customBankStyles: StylesConfig<Bank, false> = {
+    control: (base) => ({
+      ...base,
+      backgroundColor: '#f9f9f9', // Soft gray background
+      border: '1px solid #F1F1F1',
+      cursor: 'pointer',
+      borderRadius: '10px', // Rounded edges
+      boxShadow: 'none', // Remove shadow
+      minHeight: '44px', // Compact height
+      padding: '4px 8px', // Add internal spacing
+      fontSize: '12px', // Small text
+      color: '#000', // Subtle gray text
+      '&:hover': {
+        backgroundColor: '#f4f4f4', // Slightly darker gray on hover
+      },
+    }),
+    singleValue: (base) => ({
+      ...base,
+      fontSize: '12px', // Small text
+      color: '#000',
+    }),
+    placeholder: (base) => ({
+      ...base,
+      fontSize: '12px', // Small text
+      color: '#b3b3b3', // Subtle gray for placeholder
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: '#b3b3b3', // Subtle gray dropdown arrow
+      padding: '4px', // Compact padding
+    }),
+    indicatorSeparator: () => ({
+      display: 'none', // Remove the separator line
+    }),
+    menu: (base) => ({
+      ...base,
+      borderRadius: '10px', // Rounded menu
+
+      marginTop: '4px', // Add space between control and menu
+      boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)', // Subtle shadow for dropdown
+      zIndex: 10, // Ensure it appears above other elements
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isFocused ? '#F5F5F5' : 'transparent', // Highlight focused option
+
+      color: '#333333', // Darker text for options
+      fontSize: '12px', // Small text for options
+      padding: '10px 8px', // Add spacing for options
+      cursor: 'pointer', // Pointer cursor for options
+    }),
+  };
 
   const customStyles: StylesConfig<SingleValue, false> = {
     control: (provided) => ({
@@ -438,18 +490,9 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             </div>
                           </div>
                           <div className="select-wrapper">
-                            <p className="font-medium pb-1 text-xs text-[##292D32]">
-                              Time zone
-                            </p>
-                            <TimezoneSelect
-                              value={selectedTimezone}
-                              onChange={setSelectedTimezone}
-                              styles={customStyles}
-                              components={{
-                                DropdownIndicator: () => (
-                                  <TbWorld size="15px" color="#646668" />
-                                ), // Custom dropdown icon
-                              }}
+                            <TimezonePicker
+                              selectedTimezone={selectedTimezone}
+                              setSelectedTimezone={setSelectedTimezone}
                             />
                           </div>
                         </div>
@@ -553,12 +596,12 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                 <IoIosArrowDown size="15px" color="#646668" />
                               ),
                             }}
-                            name="category"
+                            name="currency"
                             onChange={(selectedOption) => {
                               if (selectedOption) {
                                 formData.set({
                                   name: 'currency',
-                                  value: selectedOption.name,
+                                  value: selectedOption.value,
                                 });
                               }
                             }}
@@ -600,7 +643,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                                         options={mappedBanks}
                                         getOptionValue={(e) => e.id.toString()}
                                         getOptionLabel={(e) => e.name}
-                                        styles={customStyles}
+                                        styles={customBankStyles}
                                         placeholder="Select a Bank"
                                         components={{
                                           Option: CustomOption,
@@ -772,20 +815,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             </div>
                           )}
                         </div>
-                        {/* <div className="flex gap-2 mt-5 mb-2">
-                          <Button
-                            type="button"
-                            className="w-[40%] h-full bg-[#EFEFEF]"
-                            onClick={() => {
-                              setOpen(true);
-                              setActive(false);
-                            }}
-                          >
-                            Back
-                          </Button>
 
-                          <UiButton block>Continue</UiButton>
-                        </div> */}
                         <div className="w-full flex justify-end mt-4 pb-2">
                           <button
                             type="submit"
