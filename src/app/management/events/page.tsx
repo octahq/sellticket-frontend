@@ -8,11 +8,13 @@ import EventCard from '@/components/events/EventCard';
 import UiButton from '@/components/ui/Button/UiButton';
 import UiTabs, { Tab } from '@/components/ui/Tabs/UiTabs';
 import UiIcon from '@/components/ui/Icon/UiIcon';
+import { AddEventDrawer } from '@/components/Modals/AddEvent';
 
 // --
 
 const Page = () => {
   const [activeEventTab, setActiveEventTab] = useState('activeEvents');
+  const [isOpen, setIsOpen] = useState(false);
 
   const eventTabs: Tab[] = [
     {
@@ -48,7 +50,10 @@ const Page = () => {
           </button>
           <div className="hidden sm:block">
             <UiButton roundedVariant="md" size="sm">
-              <div className="flex items-center gap-1 stroke-white font-semibold">
+              <div
+                className="flex items-center gap-1 stroke-white font-semibold"
+                onClick={() => setIsOpen(true)}
+              >
                 <UiIcon size="12" icon="Add" />
                 Create new event
               </div>
@@ -61,9 +66,13 @@ const Page = () => {
           <EventCard key={index} event={event} />
         ))}
       </div>
-      <button className="fixed sm:hidden bottom-[10%] right-6 w-[50px] h-[50px] rounded-full flex justify-center items-center bg-secondary-gradient stroke-white">
+      <button
+        className="fixed sm:hidden bottom-[10%] right-6 w-[50px] h-[50px] rounded-full flex justify-center items-center bg-secondary-gradient stroke-white"
+        onClick={() => setIsOpen(true)}
+      >
         <UiIcon icon="Add" size="24" />
       </button>
+      <AddEventDrawer active={isOpen} setActive={setIsOpen} />
     </section>
   );
 };

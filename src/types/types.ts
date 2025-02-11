@@ -15,3 +15,8 @@ export interface SidebarItem {
   sec: React.ReactNode;
   hover: React.ReactNode;
 }
+
+export type SingleValue = {
+  value: string;
+  label: string;
+};
