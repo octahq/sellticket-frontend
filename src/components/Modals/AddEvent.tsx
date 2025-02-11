@@ -9,7 +9,7 @@ import useObjectState from '@/hooks/useObjectState';
 import UiForm from '../ui/Form/UiForm';
 import UiInput from '../ui/Input/UiInput';
 import Select, { StylesConfig } from 'react-select';
-
+import { FiCalendar } from 'react-icons/fi';
 import { IoIosArrowDown } from 'react-icons/io';
 import UiIcon from '../ui/Icon/UiIcon';
 import img from '../../assets/images/uploadfile.png';
@@ -24,6 +24,8 @@ import { RiErrorWarningLine } from 'react-icons/ri';
 import { Input } from '../ui/input';
 import { banks } from '../common/constants';
 import TimezonePicker from '../common/TimezonePicker';
+import Calendar from 'react-calendar';
+import { formatDate } from '@/lib/utils';
 
 interface Props {
   active: boolean;
@@ -36,6 +38,10 @@ interface Bank {
   logo: string;
 }
 
+type TileProps = {
+  date: Date;
+  view: 'month' | 'year' | 'decade' | 'century';
+};
 // interface LocationData {
 //   location: {
 //     lat: number;
@@ -44,12 +50,29 @@ interface Bank {
 //   [key: string]: any; // Adjust this based on the full response structure
 // }
 
+interface FormData {
+  image: File | null;
+  imageFile: string;
+  name: string;
+  category: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  location: string;
+  description: string;
+  currency: string;
+  moreDescription: string;
+  bankName: string;
+  accountNumber: string;
+}
+
 export function AddEventDrawer({ active, setActive }: Props) {
   const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
     Intl.DateTimeFormat().resolvedOptions().timeZone
   );
   const [dateError, setDateError] = useState<string>('');
-  const formData = useObjectState({
+  const formData = useObjectState<FormData>({
     image: null,
     imageFile: '',
     name: '',
@@ -65,6 +88,10 @@ export function AddEventDrawer({ active, setActive }: Props) {
     bankName: '',
     accountNumber: '',
   });
+
+  console.log(formData);
+  const [showStartDate, setShowStartDate] = useState(false);
+  const [showEndDate, setShowEndDate] = useState(false);
   const [selectedTab, setSelectedTab] = useState('');
 
   const [startDate, setStartDate] = useState<Date>();
@@ -73,6 +100,22 @@ export function AddEventDrawer({ active, setActive }: Props) {
   const [showDetails, setShowDetails] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
+  const maxDate = new Date();
+  maxDate.setHours(0, 0, 0, 0);
+
+  const disableTile = ({ date, view }: TileProps): boolean => {
+    if (view === 'month') {
+      return date < maxDate;
+    }
+    return false;
+  };
+
+  const tileClassName = ({ date, view }: TileProps): string | undefined => {
+    if (view === 'month' && date < maxDate) {
+      return 'disabled-date'; // Return a string for the class name
+    }
+    return undefined;
+  };
   const [location, setLocation] = useState('');
   // const [isLoading, setIsLoading] = useState(true);
   // const [isError, setIsError] = useState(false);
@@ -147,6 +190,21 @@ export function AddEventDrawer({ active, setActive }: Props) {
     value: id?.value,
     label: id?.name,
   }));
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if ((event.target as HTMLElement).closest('.box') === null) {
+        setShowStartDate(false);
+        setShowEndDate(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const customBankStyles: StylesConfig<Bank, false> = {
     control: (base) => ({
       ...base,
@@ -277,7 +335,7 @@ export function AddEventDrawer({ active, setActive }: Props) {
   };
 
   const MessageWithIcon = (message: string) => (
-    <div className="flex gap-1">
+    <div className="flex gap-1 text-danger-500 text-[10px] leading-3">
       <UiIcon icon="Danger" size="10" />
       {message}
     </div>
@@ -423,18 +481,80 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               }
                             }}
                           />
+                          <div className="mt-2">
+                            {errors.category &&
+                              MessageWithIcon(errors.category)}
+                          </div>
                         </div>
-                        <div className="grid mt-4 gap-4">
-                          <div className="flex items-center gap-4 ">
-                            <div className="flex flex-col gap-[7px]">
-                              <p className="font-medium text-xs text-[##292D32]">
-                                Start date
-                              </p>
-                              <DatePicker
-                                date={startDate}
-                                setDate={setStartDate}
-                                label={'Pick start date'}
-                              />
+                        <div className="grid mt-4 gap-4 relative">
+                          <div className="flex items-center gap-4  flex-wrap">
+                            <div className="flex flex-col gap-[7px] ">
+                              {/* Start Date */}
+                              <div className="w-full box">
+                                <p className="font-medium  text-xs text-[#292D32] pb-2">
+                                  Start Date
+                                </p>
+                                <div className=" w-full">
+                                  <div
+                                    className={`flex  gap-4 border bg-[#F5F5F5]  border-opacity-30 border-[#F1F1F1] h-[46px] w-full rounded-[10px] cursor-pointer ${
+                                      formData.value.startDate
+                                        ? 'justify-between'
+                                        : 'justify-end'
+                                    } items-center p-[10px]`}
+                                    onClick={() =>
+                                      setShowStartDate((prev) => !prev)
+                                    }
+                                  >
+                                    <p className="text-xs text-[#292D32]">
+                                      {formData.value.startDate || 'Pick date'}
+                                    </p>
+                                    <div>
+                                      <FiCalendar className="mr-2 h-4 w-4 text-[#5B5B5B]" />
+                                    </div>
+                                  </div>
+
+                                  {showStartDate && (
+                                    <div className="absolute max-w-[350px] bottom-[70px] w-full z-30">
+                                      <Calendar
+                                        onChange={(
+                                          value:
+                                            | Date
+                                            | Date[]
+                                            | [Date | null, Date | null]
+                                            | null
+                                        ) => {
+                                          if (value instanceof Date) {
+                                            formData.set({
+                                              name: 'startDate',
+                                              value: formatDate(value),
+                                            });
+                                            setShowStartDate(false);
+                                          } else if (
+                                            Array.isArray(value) &&
+                                            value.length === 2 &&
+                                            value[0] instanceof Date
+                                          ) {
+                                            formData.set({
+                                              name: 'startDate',
+                                              value: formatDate(value[0]),
+                                            });
+                                            setShowStartDate(false);
+                                          }
+                                        }}
+                                        value={
+                                          formData.value.startDate
+                                            ? new Date(formData.value.startDate)
+                                            : new Date()
+                                        }
+                                        tileDisabled={disableTile}
+                                        tileClassName={tileClassName}
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              {errors.startDate &&
+                                MessageWithIcon(errors.startDate)}
                             </div>
                             <div>
                               <p className="font-medium  text-xs text-[#292D32] pb-2">
@@ -456,15 +576,73 @@ export function AddEventDrawer({ active, setActive }: Props) {
 
                           <div className="flex items-center gap-4 flex-wrap">
                             <div className="flex flex-col gap-[7px]">
-                              <p className="font-medium text-xs text-[##292D32]">
-                                End date
-                              </p>
-                              <DatePicker
-                                date={endDate}
-                                setDate={setEndDate}
-                                label={'Pick End date'}
-                              />
-                              {dateError && MessageWithIcon(dateError)}
+                              {/* End Date */}
+                              <div className="w-full box">
+                                <p className="font-medium  text-xs text-[#292D32] pb-2">
+                                  End Date
+                                </p>
+                                <div className=" w-full">
+                                  <div
+                                    className={`flex  gap-4 border bg-[#F5F5F5]  border-opacity-30 border-[#F1F1F1] h-[46px] w-full rounded-[10px] cursor-pointer ${
+                                      formData.value.endDate
+                                        ? 'justify-between'
+                                        : 'justify-end'
+                                    } items-center p-[10px]`}
+                                    onClick={() =>
+                                      setShowEndDate((prev) => !prev)
+                                    }
+                                  >
+                                    <p className="text-xs text-[#292D32]">
+                                      {formData.value.endDate || 'Pick date'}
+                                    </p>
+                                    <div>
+                                      <FiCalendar className="mr-2 h-4 w-4 text-[#5B5B5B]" />
+                                    </div>
+                                  </div>
+
+                                  {showEndDate && (
+                                    <div className="absolute max-w-[350px] bottom-[70px] w-full z-30">
+                                      <Calendar
+                                        onChange={(
+                                          value:
+                                            | Date
+                                            | Date[]
+                                            | [Date | null, Date | null]
+                                            | null
+                                        ) => {
+                                          if (value instanceof Date) {
+                                            formData.set({
+                                              name: 'endDate',
+                                              value: formatDate(value),
+                                            });
+                                            setShowEndDate(false);
+                                          } else if (
+                                            Array.isArray(value) &&
+                                            value.length === 2 &&
+                                            value[0] instanceof Date
+                                          ) {
+                                            formData.set({
+                                              name: 'endDate',
+                                              value: formatDate(value[0]),
+                                            });
+                                            setShowEndDate(false);
+                                          }
+                                        }}
+                                        value={
+                                          formData.value.endDate
+                                            ? new Date(formData.value.endDate)
+                                            : new Date()
+                                        }
+                                        tileDisabled={disableTile}
+                                        tileClassName={tileClassName}
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              {errors.endDate &&
+                                MessageWithIcon(errors.endDate)}
                             </div>
                             <div>
                               <p className="font-medium text-xs text-[#292D32] pb-2">
@@ -569,9 +747,27 @@ export function AddEventDrawer({ active, setActive }: Props) {
                             Description
                           </p>
                           <Textarea
-                            className="border-[#F1F1F1] border bg-[#F5F5F5] placeholder:text-[#CBCBCB]  placeholder:text-xs"
-                            placeholder="Add a description to encourage guest to attend"
+                            name="description"
+                            onChange={(
+                              event: React.ChangeEvent<HTMLTextAreaElement>
+                            ) => {
+                              formData.set({
+                                name: event.target.name,
+                                value: event.target.value,
+                              });
+                            }}
+                            value={formData.value.description}
+                            className={`border ${
+                              errors.description
+                                ? 'border-danger focus:border-danger focus:ring-danger' // Apply danger styles if there's an error
+                                : 'border-[#F1F1F1] focus:border-primary focus:ring-primary' // Default styles
+                            } bg-[#F5F5F5] placeholder:text-[#CBCBCB] placeholder:text-xs`}
+                            placeholder="Add a description to encourage guests to attend"
                           />
+                          <div className="mt-2">
+                            {errors.description &&
+                              MessageWithIcon(errors.description)}
+                          </div>
                         </div>
                         <div>
                           <p className="font-medium text-xs text-[##292D32] pb-2">
@@ -600,6 +796,10 @@ export function AddEventDrawer({ active, setActive }: Props) {
                               }
                             }}
                           />
+                          <div className="mt-2">
+                            {errors.currency &&
+                              MessageWithIcon(errors.currency)}
+                          </div>
                         </div>
                         <div>
                           <div className="flex gap-2">
