@@ -6,8 +6,9 @@
  */
 
 const sizeVariant = {
-  md: 'w-12 h-12',
-  sm: 'w-8 h-8',
+  md: 'w-12 h-12 p-[4px]',
+  sm: 'w-8 h-8 p-[4px]',
+  xs: 'h-6 w-6 p-[2px]',
 };
 
 interface Props {
@@ -18,7 +19,7 @@ interface Props {
 export default function UiAvatar({ SvgAvatar, size = 'md' }: Props) {
   return (
     <div
-      className={`p-[4px]  bg-avatar-gradient-primary !rounded-full backdrop-blur-[6.2px] ${sizeVariant[size]}`}
+      className={` bg-avatar-gradient-primary !rounded-full backdrop-blur-[6.2px] ${sizeVariant[size]}`}
     >
       <div className="ui-avatar w-full h-full !rounded-full">
         <SvgAvatar />

@@ -139,3 +139,22 @@ body {
   transform: scaleX(1);
   transform-origin: left;
 }
+
+/* remove arrows from number input */
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+ input[type=number] {
+    -moz-appearance: textfield;
+    -ms-appearance: textfield;
+ }
+
+
+ [data-state="checked"] [data-slot="item-indicator"] {
+  display: none !important;
+}
+

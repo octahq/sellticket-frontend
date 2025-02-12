@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '516px',
+      },
       colors: {
         primary: {
           base: '#D4FF5F',
@@ -49,6 +52,7 @@ export default {
           500: '#C5292A',
         },
         success: {
+          50: '#F6FDF4',
           100: '#F4FFF280',
           200: '#EAFAE7',
           300: '#87B180',
@@ -56,7 +60,10 @@ export default {
           700: '#0E6301',
         },
         warning: {
+          100: '#FFEFDC',
+          200: '#F1D4B1',
           500: '#FFAC00',
+          700: '#F28500'
         },
         lines: {
           100: '#EFEFEF',
@@ -98,6 +105,7 @@ export default {
         'event-image-frame-shadow': '0px 25px 25px 0px #00000008',
         'event-image-frame-hole': '0px 0px 4px 0px #00000040 inset',
         'input-shadow': '0px 1.5px 4.3px 0px #B4B4B440',
+        'view-profile':'0px 1px 3px 0px #89898940',
       },
       gridTemplateColumns: {
         'responsive-grid': 'repeat(auto-fit, minmax(242px, 1fr))',

@@ -15,6 +15,11 @@ import {
 
 import UiIcon from '../Icon/UiIcon';
 
+const triggerSizeClasses = {
+  md: '24',
+  lg: '32'
+}
+
 export type DropDownData = {
   label: React.ReactNode;
   func: (id?: string) => void;
@@ -24,14 +29,20 @@ export type DropDownData = {
 interface Props {
   options: DropDownData[];
   trigger?: React.ReactNode;
+  triggerSize?: keyof typeof triggerSizeClasses;
   itemId?: string;
 }
 
-export default function UiDropDown({ options, trigger, itemId }: Props) {
+export default function UiDropDown({ options, trigger, itemId, triggerSize= 'md' }: Props) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none ">
-        {trigger || <UiIcon icon="ThreeDotsVertical" size="24" />}
+      <DropdownMenuTrigger className="outline-none">
+        {trigger || (
+          <UiIcon
+            icon="ThreeDotsVertical"
+            size={triggerSizeClasses[triggerSize]}
+          />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent
         side="right"
