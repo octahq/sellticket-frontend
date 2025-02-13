@@ -10,7 +10,7 @@ import UiDropDown, {DropDownData} from '@/components/ui/DropDown/UiDropDown';
 import UiIcon from '@/components/ui/Icon/UiIcon';
 import TicketIndicatior from '@/components/events/TicketIndicatior';
 
-import { formatDate } from '@/lib/utils';
+import { formattDate } from '@/lib/utils';
 import { useMemo } from 'react';
 import UiMap from '@/components/ui/Map/UiMap';
 import UiButton from '@/components/ui/Button/UiButton';
@@ -80,7 +80,7 @@ export default function Page() {
           <UiIcon icon="CalendarGreen" size="18" />
           <div className="max-w-[200px]">
             <h3 className="text-xs font-semibold text-secondary-700 mb-1">
-              {event && formatDate(event.date, 'dddd, MMMM D, YYYY')}
+              {event && formattDate(event.date, 'dddd, MMMM D, YYYY')}
             </h3>
             <p className="text-xs text-secondary-400">6:00 PM - 11:00 PM WAT</p>
           </div>

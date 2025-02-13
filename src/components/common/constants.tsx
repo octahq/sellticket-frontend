@@ -205,3 +205,27 @@ export const banks: {
   },
   { id: 3, name: 'Wells Fargo', logo: bankImg },
 ];
+
+export const eventCategories: {
+  name: string;
+  value: string;
+}[] = [
+  {
+    name: 'cat 1',
+    value: 'cat 1',
+  },
+  {
+    name: 'cat 1',
+    value: 'cat 1',
+  },
+  {
+    name: 'cat 1',
+    value: 'cat 1',
+  },
+];
+
+export const locationTabs = [
+  { label: 'Undisclosed', value: 'Undisclosed' },
+  { label: 'Physical', value: 'Physical' },
+  { label: 'Virtual', value: 'Virtual' },
+];
