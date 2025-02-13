@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';  
 
 import { events } from '@/api/mock/events';
 
@@ -68,7 +68,7 @@ export default function Page() {
           <p>VVIP</p>
           <p>₦0.0</p>
         </div>
-      ),
+      ),    
       value: 'vvip',
     },
   ];
