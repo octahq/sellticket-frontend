@@ -11,7 +11,7 @@ import UiButton from '../ui/Button/UiButton';
 import UiIcon from '../ui/Icon/UiIcon';
 import UiDropDown, { DropDownData } from '../ui/DropDown/UiDropDown';
 
-// --
+// ---
 
 interface Props {
   event: Event;
