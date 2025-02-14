@@ -47,10 +47,11 @@ export default function CustomSelect({ name, onChange, value, error, label, vari
   return (
     <Select name={name} onValueChange={onSelectOption}>
       <SelectTrigger
+        style={{ '--trigger-width': '100%' } as React.CSSProperties}
         className={`rounded-[10px] outline-none ring-0 border-0 focus-visible:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 w-full ${variantClasses[variant]} ${sizeClasses[size]}`}
       >
         <SelectValue
-          className="w-full  border border-red-700"
+          className="w-full"
           placeholder={
             <div
               className={`${variant === 'default' ? 'text-[#CBCBCB]' : 'text-[#ADADAD]'} `}
@@ -60,10 +61,13 @@ export default function CustomSelect({ name, onChange, value, error, label, vari
           }
         />
       </SelectTrigger>
-      <SelectContent className="bg-white border border-stroke-100 shadow-none">
+      <SelectContent
+        style={{ width: 'var(--radix-select-trigger-width)' }}
+        className="bg-white border border-lines-100 shadow-none p-2 roounded-[10px]"
+      >
         {options.map((option) => (
           <SelectItem
-            className="[&>option]:checked:hidden"
+            className="px-3 py-[6px] rounded-[5px] hover:bg-lines-100 transition-colors duration-150 ease-in"
             key={option.value}
             value={option.value}
           >

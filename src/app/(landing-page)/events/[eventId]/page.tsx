@@ -48,6 +48,7 @@ export default function Page() {
       label: (
         <div className="flex justify-between">
           <p>Regular</p>
+          <UiPill size='md'  variant='nude'>Free</UiPill>
           <p>₦0.0</p>
         </div>
       ),
@@ -68,7 +69,7 @@ export default function Page() {
           <p>VVIP</p>
           <p>₦0.0</p>
         </div>
-      ),    
+      ),
       value: 'vvip',
     },
   ];
