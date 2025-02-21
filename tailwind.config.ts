@@ -9,10 +9,14 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: '516px',
+      },
       colors: {
         primary: {
           base: '#D4FF5F',
           50: '#FDFFFA',
+          60: '#EAF9E7CC',
           100: '#F6FFDF',
           200: '#F1FFCA',
           300: '#E9FFAF',
@@ -46,9 +50,11 @@ export default {
         danger: {
           100: '#FCEFEF',
           300: '#DE8787',
+          400: '#FF0000',
           500: '#C5292A',
         },
         success: {
+          50: '#F6FDF4',
           100: '#F4FFF280',
           200: '#EAFAE7',
           300: '#87B180',
@@ -56,7 +62,12 @@ export default {
           700: '#0E6301',
         },
         warning: {
+          100: '#FFEFDC',
+          200: '#F1D4B1',
           500: '#FFAC00',
+          600: '#DD920B',
+          700: '#F28500',
+
         },
         lines: {
           100: '#EFEFEF',
@@ -69,6 +80,11 @@ export default {
           400: '#A0A0A0',
           500: '#9C9C9C',
         },
+        teal: {
+          200: '#AFCBAA',
+          400: '#5E9756',
+          500: '#367D2B'
+        }
       },
       backgroundImage: {
         'avatar-gradient-primary':
@@ -87,7 +103,9 @@ export default {
           'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #CCCCCC 100%)',
         'input-gradient-error':
           'linear-gradient(180deg, rgba(241, 241, 241, 0.945098) 0%, #C5292A 100%)',
-        'input-gradient-transparent': 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)'
+        'input-gradient-transparent':
+          'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%)',
+        'event-checkout-gradient': 'linear-gradient(360deg, #ECECEC 0%, #FAFAFA 100%)'
       },
       boxShadow: {
         'auth-card-shadow': '0px 3.53px 15.87px -3.53px #6A803040',
@@ -98,6 +116,9 @@ export default {
         'event-image-frame-shadow': '0px 25px 25px 0px #00000008',
         'event-image-frame-hole': '0px 0px 4px 0px #00000040 inset',
         'input-shadow': '0px 1.5px 4.3px 0px #B4B4B440',
+        'view-profile': '0px 1px 3px 0px #89898940',
+        '@-shadow': '0px 1.5px 2.8px 0px #9E9E9E40',
+        'atm-card':  '0px 1px 2px 0px #0A0D120D'
       },
       gridTemplateColumns: {
         'responsive-grid': 'repeat(auto-fit, minmax(242px, 1fr))',

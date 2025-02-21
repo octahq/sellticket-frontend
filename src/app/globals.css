@@ -245,3 +245,39 @@ abbr[title] {
   color: #d3d3d3; /* Gray out the text */
   pointer-events: none; /* Disable clicking */
 }
+
+/* remove arrows from number input */
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  -ms-appearance: textfield;
+}
+
+/* select styles */
+
+[data-state='checked'] svg {
+  display: none !important;
+}
+
+.SelectContent {
+  width: var(--radix-select-trigger-width);
+}
+
+.select-trigger {
+  gap: 10px;
+}
+
+.select-trigger > span {
+  text-align: left;
+  width: 100%;
+}
+
+.select-item > span {
+  width: 100%;
+}

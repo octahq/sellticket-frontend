@@ -1,8 +1,17 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import dayjs from 'dayjs';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function formattDate(date: string | Date, format: string) {
+  const dateObject = dayjs(date);
+  if (!dateObject.isValid()) {
+    return;
+  }
+  return dateObject.format(format);
 }
 
 export const formatDate = (
@@ -26,4 +35,10 @@ export const formatDate = (
     month: 'short',
     year: 'numeric',
   });
+};
+
+export function formatTime(seconds: number) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 };

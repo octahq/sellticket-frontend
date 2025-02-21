@@ -19,7 +19,7 @@ interface Props {
 export default function ConfirmCode({ textCenter }: Props) {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [count, setCount] = useState(59);
+  const [timer, setTimer] = useState(59);
 
   const ErrorMessage = useMemo(
     () => (
@@ -58,13 +58,13 @@ export default function ConfirmCode({ textCenter }: Props) {
   }
 
   useEffect(() => {
-    if (count > 0) {
-      const timer = setInterval(() => {
-        setCount((prevCount) => prevCount - 1);
+    if (timer > 0) {
+      const timerCountDown = setInterval(() => {
+        setTimer((prevCount) => prevCount - 1);
       }, 1000);
-      return () => clearInterval(timer);
+      return () => clearInterval(timerCountDown);
     }
-  }, [count]);
+  }, [timer]);
 
   return (
     <div className={`${textCenter && 'text-center'}`}>
@@ -82,10 +82,10 @@ export default function ConfirmCode({ textCenter }: Props) {
       />
       <div className="flex justify-between gap-2 items-center mt-4 text-sm">
         {messageToRender}
-        {count > 0 ? (
-          <p>{count} secs left</p>
+        {timer > 0 ? (
+          <p>{timer} secs left</p>
         ) : (
-          <button onClick={() => setCount(59)} className="font-semibold">
+          <button onClick={() => setTimer(59)} className="font-semibold">
             Resend code
           </button>
         )}
