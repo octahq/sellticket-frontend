@@ -20,15 +20,22 @@
 'use client';
 
 import { useMemo } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+
 
 import UiField from '../Field/UiField';
 
-export type InputType = 'text' | 'number' | 'time' | 'radio';
+export type InputType = 'text' | 'number' | 'time' | 'radio' | 'email' | 'phone';
 
 const variantClasses = {
   default: {
     parent: '',
     child: 'bg-neutral-200 border border-stroke-300',
+  },
+  secondary: {
+    parent: '',
+    child: 'bg-white border border-stroke-100',
   },
   'gradient-primary': {
     parent: 'bg-input-gradient-primary shadow-input-shadow',
@@ -42,7 +49,8 @@ const variantClasses = {
 
 const sizeVariants = {
   lg: 'h-[52px]',
-  md: 'h-12',
+  md: 'h-11',
+  xs: 'h-[34px]',
 };
 
 const roundedVariant = {
@@ -51,7 +59,7 @@ const roundedVariant = {
 };
 
 interface Props {
-  label?: string;
+  label?: React.ReactNode;
   type?: InputType;
   value: string | null | number;
   placeholder?: string;
@@ -77,7 +85,7 @@ export default function UiInput({
   variant = 'default',
   isGradient = false,
   rounded = 'md',
-  size = 'lg',
+  size = 'md',
   name,
   placeholder,
   disabled,
@@ -90,6 +98,12 @@ export default function UiInput({
     onChange({ name: e.target.name, value: e.target.value });
   }
 
+  function handlePhoneChange(value: string | undefined) {
+    if (disabled) return;
+
+    onChange({ name, value: value! });
+  }
+
   const validatedPlaceholder = useMemo(() => {
     return error
       ? 'placeholder:text-danger-500'
@@ -99,10 +113,11 @@ export default function UiInput({
   return (
     <UiField label={label} error={error}>
       <div
-        className={`h-11 w-full box-border rounded-[10px] transition-all duration-300
+        className={`w-full box-border rounded-[10px] transition-all duration-300 focus-within:bg-input-gradient-transparent focus-within:bg-secondary-600
           ${isGradient ? 'p-[1.5px]' : 'p-0'} 
-          ${variantClasses[variant].parent}  
-          ${error && '!bg-input-gradient-error'} focus-within:bg-input-gradient-transparent focus-within:bg-secondary-600`}
+          ${variantClasses[variant].parent} 
+          ${sizeVariants[size]} 
+          ${error && '!bg-input-gradient-error'} `}
       >
         <div
           className={`relative w-full h-full flex gap-[5px] px-4 rounded-[9px] transition-all duration-200 focus-within:border-secondary-600 ${variantClasses[variant].child}`}
@@ -111,16 +126,29 @@ export default function UiInput({
             <div className="text-sm flex items-center">{prefixNode}</div>
           )}
 
-          <input
-            className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-xs  bg-transparent outline-none ${validatedPlaceholder}`}
-            placeholder={placeholder}
-            type={type}
-            value={value || ''}
-            name={name}
-            id={name}
-            disabled={disabled}
-            onChange={sendValue}
-          />
+          {type === 'phone' ? (
+            <div>
+              <PhoneInput
+                defaultCountry="NG"
+                className="phone-input flex-1"
+                placeholder={placeholder}
+                disabled={disabled}
+                value={`${value || ''}`}
+                onChange={handlePhoneChange}
+              />
+            </div>
+          ) : (
+            <input
+              className={`w-full flex justify-center items-center text-base md:text-sm font-medium placeholder:text-sm  bg-transparent outline-none ${validatedPlaceholder}`}
+              placeholder={placeholder}
+              type={type}
+              value={value || ''}
+              name={name}
+              id={name}
+              disabled={disabled}
+              onChange={sendValue}
+            />
+          )}
 
           {suffixNode && (
             <div className="pl-2 pr-4 text-gray-500 text-sm flex items-center">

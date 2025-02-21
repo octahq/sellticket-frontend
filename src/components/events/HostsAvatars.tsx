@@ -1,5 +1,3 @@
 export default function HostsAvatars() {
-  return (
-    <div>HostsAvatars</div>
-  )
+  return <div>HostsAvatars</div>;
 }

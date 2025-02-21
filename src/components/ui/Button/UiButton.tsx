@@ -18,10 +18,12 @@ import { MouseEventHandler } from 'react';
 const variantClasses = {
   primary: 'bg-secondary-gradient text-white',
   tertiary: 'bg-secondary-700 text-white',
+  gray: 'bg-stroke-100 text-[#071134]',
 };
 
 const sizeClasses = {
-  lg: 'h-[46px]  text-base px-6',
+  xl: 'h-[50px] text-base px-8',
+  lg: 'h-[46px] text-base px-6',
   md: 'h-10 text-sm px-8',
   sm: 'h-8 text-xs px-[9px]',
 };
@@ -66,7 +68,7 @@ export default function UiButton({
 }: Props) {
   return (
     <button
-      className={`flex items-center justify-center whitespace-nowrap  ${
+      className={`flex items-center  justify-center whitespace-nowrap  ${
         block ? 'w-full' : ''
       } ${variantClasses[variant]} ${sizeClasses[size]}  ${
         disabled && 'opacity-50 cursor-not-allowed'

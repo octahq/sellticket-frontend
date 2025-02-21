@@ -11,17 +11,22 @@ const sizeClasses = {
   md: 'h-[19px] -sm px-[6px]',
 };
 
+export type PillVariantType = keyof typeof variants;
+
 interface Props {
-  variant?: keyof typeof variants;
+  variant?: PillVariantType;
   size?: keyof typeof sizeClasses;
   children: React.ReactNode;
 }
 
-
-export default function UiPill({ children, variant = 'neutral', size = 'sm' }: Props) {
+export default function UiPill({
+  children,
+  variant = 'neutral',
+  size = 'sm',
+}: Props) {
   return (
     <div
-      className={`rounded-[100px]  w-fit flex items-center gap-1 font-medium ${variants[variant]} ${sizeClasses[size]}`}
+      className={`rounded-[100px] leading-[0px] w-fit flex items-center gap-1 font-medium ${variants[variant]} ${sizeClasses[size]}`}
     >
       {children}
     </div>

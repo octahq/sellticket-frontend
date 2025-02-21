@@ -2,14 +2,14 @@ import React from 'react';
 
 interface Props {
   ticketsLeft: number;
-  totalTickets: number; 
+  totalTickets: number;
 }
 
 // const TicketIndicator: React.FC<TicketIndicatorProps> = ({
 //   ticketsLeft,
 //   totalTickets = 10,
 // }) => {
-  
+
 // };
 
 export default function TicketIndicatior({ ticketsLeft, totalTickets }: Props) {
@@ -50,4 +50,3 @@ export default function TicketIndicatior({ ticketsLeft, totalTickets }: Props) {
     </div>
   );
 }
-

@@ -248,22 +248,36 @@ abbr[title] {
 
 /* remove arrows from number input */
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
- input[type=number] {
-    -moz-appearance: textfield;
-    -ms-appearance: textfield;
- }
+input[type='number'] {
+  -moz-appearance: textfield;
+  -ms-appearance: textfield;
+}
 
+/* select styles */
 
-
-[data-state="checked"] svg {
+[data-state='checked'] svg {
   display: none !important;
 }
+
 .SelectContent {
   width: var(--radix-select-trigger-width);
+}
+
+.select-trigger {
+  gap: 10px;
+}
+
+.select-trigger > span {
+  text-align: left;
+  width: 100%;
+}
+
+.select-item > span {
+  width: 100%;
 }

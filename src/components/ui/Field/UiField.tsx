@@ -19,7 +19,7 @@ interface Props {
 
 export default function UiField({ error, label, hint, children }: Props) {
   return (
-    <div className="text-left relative">
+    <div className="text-left relative w-full">
       <label className="text-sm leading-7 font-ceraRegular text-gray-1000">
         {label}{' '}
       </label>

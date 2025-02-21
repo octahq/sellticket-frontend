@@ -6,7 +6,7 @@ import EventImg2 from '@/assets/images/event-image2.jpg';
 import UiAvatar from '../ui/Avatar/UiAvatar';
 import Event from '@/types/Event';
 
-export default function EventImageFrame({event}: {event: Event}) {
+export default function EventImageFrame({ event }: { event: Event }) {
   const FrameRope = useMemo(() => {
     return (
       <span className="relative w-3 h-3 bg-[#c3c3c3] rounded-full inset-0 shadow-event-image-frame-hole">
@@ -24,31 +24,31 @@ export default function EventImageFrame({event}: {event: Event}) {
   }, []);
 
   const hosts = useMemo(() => {
-      return event?.hosts.map((host) => host.name).join(',');
-    }, [event]);
-  
-    const avatars = useMemo(() => {
-      return event?.hosts.map((host) => host.avatar);
-    }, [event]);
-  
-    const renderedAvatars = useMemo(
-      () => (
-        <span className="flex">
-          {avatars?.map((avatar, index) => (
-            <div
-              key={index}
-              style={{
-                zIndex: `${avatars.length - index}`,
-              }}
-              className={`relative z-[${avatars.length - index}] ${index > 0 && '-ml-2'}`}
-            >
-              <UiAvatar size="xs" SvgAvatar={avatar} />
-            </div>
-          ))}
-        </span>
-      ),
-      [avatars]
-    );
+    return event?.hosts.map((host) => host.name).join(',');
+  }, [event]);
+
+  const avatars = useMemo(() => {
+    return event?.hosts.map((host) => host.avatar);
+  }, [event]);
+
+  const renderedAvatars = useMemo(
+    () => (
+      <span className="flex">
+        {avatars?.map((avatar, index) => (
+          <div
+            key={index}
+            style={{
+              zIndex: `${avatars.length - index}`,
+            }}
+            className={`relative z-[${avatars.length - index}] ${index > 0 && '-ml-2'}`}
+          >
+            <UiAvatar size="xs" SvgAvatar={avatar} />
+          </div>
+        ))}
+      </span>
+    ),
+    [avatars]
+  );
 
   return (
     <div className="bg-white rounded-2xl p-3 pt-2 shadow-event-image-frame-shadow">
@@ -66,9 +66,9 @@ export default function EventImageFrame({event}: {event: Event}) {
           <p className="text-secondary-300 text-xs font-medium mb-1">
             Organizer
           </p>
-          <div className='flex items-center gap-[2px]'>
+          <div className="flex items-center gap-[2px]">
             {renderedAvatars}
-            <p className='text-xs'>{hosts}</p>
+            <p className="text-xs">{hosts}</p>
           </div>
         </div>
         <Link href="">

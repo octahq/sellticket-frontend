@@ -17,8 +17,8 @@ import UiIcon from '../Icon/UiIcon';
 
 const triggerSizeClasses = {
   md: '24',
-  lg: '32'
-}
+  lg: '32',
+};
 
 export type DropDownData = {
   label: React.ReactNode;
@@ -33,7 +33,12 @@ interface Props {
   itemId?: string;
 }
 
-export default function UiDropDown({ options, trigger, itemId, triggerSize= 'md' }: Props) {
+export default function UiDropDown({
+  options,
+  trigger,
+  itemId,
+  triggerSize = 'md',
+}: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="outline-none">
